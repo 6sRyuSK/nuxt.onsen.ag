@@ -14,7 +14,7 @@
         @input="up"
       ></v-text-field>
     <v-layout row wrap>
-      <v-flex v-for="item in programList" :key="item.title" xs3>
+      <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <a :href="item.moviePath">
           <v-img :src="`http://www.onsen.ag/${item.thumbnailPath}`" class="image" width="100%"/>
         </a>
