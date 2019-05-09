@@ -43,7 +43,9 @@ export default {
           programInfoList.push({
             title: value.title,
             thumbnailPath: value.thumbnailPath, 
-            moviePath: value.moviePath.pc
+            moviePath: value.moviePath.pc,
+            update: value.update,
+            schedule: value.schedule,
           })
         } catch (err) {
           // console.log(err)

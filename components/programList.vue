@@ -29,10 +29,11 @@ let programList
 export default {
   data(){
     programList = this.$store.getters.programsInfoList
+    const sortProgramList = [...programList].sort(((a, b) => a.update < b.update ? 1 : -1))
     // console.log(this.programsInfoList, "------------")
     return{
       inputSearchWord: "",
-      programList : programList
+      programList : sortProgramList
     }
   },
   methods: {
