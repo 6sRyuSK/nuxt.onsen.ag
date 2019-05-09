@@ -26,7 +26,7 @@ export default {
       const item = res[key];
       const programInfo_getUrl = encodeURI( programInfo_baseUrl + item)
       return axios.get(programInfo_getUrl).then(function(response) {
-        console.log(response)
+        // console.log(response)
         return JSON.parse(response.data.replace('callback(', '').replace(');', ''))
       
       })

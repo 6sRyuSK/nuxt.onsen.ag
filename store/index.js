@@ -10,7 +10,7 @@ export const mutations = {
   setprogramsInfoList(state, payload) {
     // console.log('payload', payload)
     state.programsInfoList = payload
-    console.log(state.programsInfoList)
+    // console.log(state.programsInfoList)
   }
 }
 
