@@ -1,7 +1,20 @@
 <template>
   <v-container fluid grid-list-sm>
+    <v-text-field
+        append-icon="mic"
+        class="mx-3"
+        flat
+        label="Search"
+        prepend-inner-icon="search"
+        solo-inverted
+        height="60"
+        background-color="pink lighten-2"
+        color="grey lighten-3"
+        v-model="inputSearchWord"
+        @input="up"
+      ></v-text-field>
     <v-layout row wrap>
-      <v-flex v-for="item in programsInfoList" :key="item.title" xs3>
+      <v-flex v-for="item in programList" :key="item.title" xs3>
         <a :href="item.moviePath">
           <img :src="`http://www.onsen.ag/${item.thumbnailPath}`" class="image" width="100%" height="100%">
         </a>
@@ -12,8 +25,23 @@
 <script>
 
 import { mapState } from 'vuex'
-
+let programList
 export default {
+  data(){
+    programList = this.$store.getters.programsInfoList
+    // console.log(this.programsInfoList, "------------")
+    return{
+      inputSearchWord: "",
+      programList : programList
+    }
+  },
+  methods: {
+    up() {
+      let filterWord = this.inputSearchWord
+      console.log(filterWord)
+      this.programList = [...programList].filter(programList=> programList.title.match(filterWord))
+    }
+  },
   computed: {
     ...mapState({
       programsInfoList: state => state.programsInfoList,
