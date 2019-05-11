@@ -1,7 +1,7 @@
 export const strict = false
 export const state = () => ({
   programsInfoList: [],
-  fillterDayState: 0,
+  fillterDayState: "0",
 })
 
 export const mutations = {

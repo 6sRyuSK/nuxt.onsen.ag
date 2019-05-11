@@ -7,24 +7,14 @@
       fixed
       app
     >
-      
-      <!-- <p>{{ day }}</p> -->
-      <!-- <v-checkbox v-model="day" label="月曜" value="1"></v-checkbox> -->
-      <!-- <v-checkbox v-model="day" label="火曜" value="2"></v-checkbox> -->
-      <!-- <v-checkbox v-model="day" label="水曜" value="3"></v-checkbox> -->
-      <!-- <v-checkbox v-model="day" label="木曜" value="4"></v-checkbox> -->
-      <!-- <v-checkbox v-model="day" label="金曜" value="5"></v-checkbox> -->
-      <!-- <v-checkbox v-model="day" label="土曜・日曜" :value='"0"'></v-checkbox> -->
-      <!-- <v-checkbox :value="checkboxState" @change="onChangeCheckbox();" label="土曜・日曜"></v-checkbox> -->
-      <p>{{ day || 'null' }}</p>
       <v-radio-group v-model="day" :mandatory="false">
-        <v-radio label="All" value=0></v-radio>
-        <v-radio label="月曜" value=1></v-radio>
-        <v-radio label="火曜" value=2></v-radio>
-        <v-radio label="水曜" value=3></v-radio>
-        <v-radio label="木曜" value=4></v-radio>
-        <v-radio label="金曜" value=5></v-radio>
-        <v-radio label="土曜・日曜" value=6></v-radio>
+        <v-radio label="All" value="0"></v-radio>
+        <v-radio label="月曜" value="1"></v-radio>
+        <v-radio label="火曜" value="2"></v-radio>
+        <v-radio label="水曜" value="3"></v-radio>
+        <v-radio label="木曜" value="4"></v-radio>
+        <v-radio label="金曜" value="5"></v-radio>
+        <v-radio label="土曜・日曜" value="6"></v-radio>
       </v-radio-group>
 
     </v-navigation-drawer>
@@ -73,7 +63,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'onsen.ag',
-      day: 0,
+      day: "0",
       checkboxState: false
     }
   },
