@@ -26,19 +26,15 @@
 <script>
 
 import { mapState } from 'vuex'
-let programList
+let programsInfoList
 export default {
   data(){
-    programList = this.$store.getters.programsInfoList
-    
-    // console.log(this.programsInfoList, "------------")
+    programsInfoList = this.$store.getters.programsInfoList
+    programsInfoList = [...programsInfoList].sort(((a, b) => a.update < b.update ? 1 : -1))
     return{
       inputSearchWord: "",
-      programList : programList
+      programList : programsInfoList
     }
-  },
-  mounted() {
-    this.programList = [...programList].sort(((a, b) => a.update < b.update ? 1 : -1))
   },
   methods: {
     up() {
@@ -47,6 +43,22 @@ export default {
       this.programList = [...programList].filter(programList=> programList.title.match(filterWord))
     }
   },
+  computed: {
+    fillterDayState() {
+      return this.$store.state.fillterDayState
+    }
+  },
+  watch: {
+    fillterDayState(val) {
+      if(val == 0) {
+        return this.programList = programsInfoList
+      }
+      this.programList = [...programsInfoList].filter(a => {
+        const day = new Date(a.update).getDay().toString()
+        return day.match(...val)
+      })
+    }
+  }
   
 }
 </script>
