@@ -44,7 +44,7 @@ export default {
             title: value.title,
             thumbnailPath: value.thumbnailPath, 
             moviePath: value.moviePath.pc,
-            update: value.update,
+            update: new Date(value.update),
             schedule: value.schedule,
           })
         } catch (err) {

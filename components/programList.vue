@@ -15,6 +15,7 @@
       ></v-text-field>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
+        <h4>{{item.update.toLocaleDateString()}}</h4>
         <a :href="item.moviePath">
           <v-img :src="`http://www.onsen.ag/${item.thumbnailPath}`" class="image" width="100%"/>
         </a>
@@ -29,12 +30,15 @@ let programList
 export default {
   data(){
     programList = this.$store.getters.programsInfoList
-    const sortProgramList = [...programList].sort(((a, b) => a.update < b.update ? 1 : -1))
+    
     // console.log(this.programsInfoList, "------------")
     return{
       inputSearchWord: "",
-      programList : sortProgramList
+      programList : programList
     }
+  },
+  mounted() {
+    this.programList = [...programList].sort(((a, b) => a.update < b.update ? 1 : -1))
   },
   methods: {
     up() {
@@ -42,11 +46,6 @@ export default {
       console.log(filterWord)
       this.programList = [...programList].filter(programList=> programList.title.match(filterWord))
     }
-  },
-  computed: {
-    ...mapState({
-      programsInfoList: state => state.programsInfoList,
-    })
   },
   
 }
