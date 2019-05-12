@@ -1,6 +1,5 @@
 <template>
   <v-container fluid grid-list-sm>
-    {{json}}
     <v-text-field
         append-icon="mic"
         class="mx-3"
