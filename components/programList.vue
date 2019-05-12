@@ -46,6 +46,7 @@ export default {
         .then(json => {
           return json.result
         }).catch(err => {
+          console.log("jsonpERR:", err)
       })
       this.programList = programsInfoList.filter(a => {
         let hit
