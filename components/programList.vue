@@ -15,7 +15,7 @@
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <a :href="item.moviePath">
-          <v-img :src="`http://www.onsen.ag/${item.thumbnailPath}`" class="image" width="100%"/>
+          <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%"/>
         </a>
       </v-flex>
     </v-layout>
@@ -41,7 +41,7 @@ export default {
         return
       }
       const list = await this.$jsonp(
-          'http://www.onsen.ag/data/api/searchMovie',
+          'https://www.onsen.ag/data/api/searchMovie',
           {word: this.inputSearchWord, callbackName:'callback' })
         .then(json => {
           return json.result
