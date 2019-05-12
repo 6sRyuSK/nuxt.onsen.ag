@@ -1,5 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
+    {{json}}
     <v-text-field
         append-icon="mic"
         class="mx-3"
@@ -11,11 +12,9 @@
         background-color="pink lighten-2"
         color="grey lighten-3"
         v-model="inputSearchWord"
-        @input="up"
       ></v-text-field>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
-        <h4>{{item.update.toLocaleDateString()}}</h4>
         <a :href="item.moviePath">
           <v-img :src="`http://www.onsen.ag/${item.thumbnailPath}`" class="image" width="100%"/>
         </a>
@@ -37,11 +36,29 @@ export default {
     }
   },
   methods: {
-    up() {
-      let filterWord = this.inputSearchWord
-      console.log(filterWord)
-      this.programList = [...programList].filter(programList=> programList.title.match(filterWord))
+    async searchProgram() {
+      if(this.inputSearchWord === ''){
+        this.programList = programsInfoList
+        return
+      }
+      const list = await this.$jsonp(
+          'http://www.onsen.ag/data/api/searchMovie',
+          {word: this.inputSearchWord, callbackName:'callback' })
+        .then(json => {
+          return json.result
+        }).catch(err => {
+      })
+      this.programList = programsInfoList.filter(a => {
+        let hit
+        list.forEach(function(val) {
+          if(a.url == val) hit = a
+        })
+        return hit
+      })
     }
+  },
+  created() {
+    this.debouncedSearchProgram = _.debounce(this.searchProgram, 250)
   },
   computed: {
     fillterDayState() {
@@ -55,8 +72,11 @@ export default {
       }
       this.programList = [...programsInfoList].filter(a => {
         const day = new Date(a.update).getDay().toString()
-        return day.match(...val)
+        return day.match(val)
       })
+    },
+    async inputSearchWord(val) {
+      this.debouncedSearchProgram()
     }
   }
   
