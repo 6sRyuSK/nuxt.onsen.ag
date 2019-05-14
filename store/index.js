@@ -2,6 +2,7 @@ export const strict = false
 export const state = () => ({
   programsInfoList: [],
   fillterDayState: "0",
+  inputSearchWord: "",
 })
 
 export const mutations = {
@@ -12,13 +13,19 @@ export const mutations = {
   },
   setfillterDayState(state, payload) {
     state.fillterDayState = payload
-  }
+  },
+  setInputSearchWord(state, payload) {
+    state.inputSearchWord = payload
+  },
 }
 
 export const actions = {
   setfillterDayState({commit}, payload) {
     commit('setfillterDayState', payload)
-  }
+  },
+  setInputSearchWord({commit}, payload) {
+    commit('setInputSearchWord', payload)
+  },
 }
 
 

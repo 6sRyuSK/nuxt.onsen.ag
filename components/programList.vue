@@ -1,17 +1,5 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-text-field
-        append-icon="mic"
-        class="mx-3"
-        flat
-        label="Search"
-        prepend-inner-icon="search"
-        solo-inverted
-        height="60"
-        background-color="pink lighten-2"
-        color="grey lighten-3"
-        v-model="inputSearchWord"
-      ></v-text-field>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <a :href="item.moviePath">
@@ -29,7 +17,6 @@ export default {
   data(){
     programsInfoList = this.$store.getters.programsInfoList
     return{
-      inputSearchWord: "",
       programList : programsInfoList
     }
   },
@@ -62,6 +49,9 @@ export default {
   computed: {
     fillterDayState() {
       return this.$store.state.fillterDayState
+    },
+    inputSearchWord() {
+      return this.$store.state.inputSearchWord
     }
   },
   watch: {
@@ -74,7 +64,7 @@ export default {
         return day.match(val)
       })
     },
-    async inputSearchWord(val) {
+    inputSearchWord(val) {
       this.debouncedSearchProgram()
     }
   }
