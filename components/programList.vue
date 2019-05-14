@@ -28,7 +28,6 @@ let programsInfoList
 export default {
   data(){
     programsInfoList = this.$store.getters.programsInfoList
-    programsInfoList = [...programsInfoList].sort(((a, b) => a.update < b.update ? 1 : -1))
     return{
       inputSearchWord: "",
       programList : programsInfoList

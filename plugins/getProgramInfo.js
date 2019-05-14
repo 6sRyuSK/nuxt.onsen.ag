@@ -33,7 +33,7 @@ const getProgramInfo = async (programList) => {
       }
     })
   })
-
+  programInfoList = [...programInfoList].sort(((a, b) => a.update < b.update ? 1 : -1))
   return programInfoList
 }
 
