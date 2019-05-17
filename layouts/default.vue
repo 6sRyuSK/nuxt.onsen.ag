@@ -17,6 +17,19 @@
         <v-radio label="土曜・日曜" value="6"></v-radio>
       </v-radio-group>
 
+      <v-text-field
+        append-icon="mic"
+        class="mx-3"
+        flat
+        label="Search"
+        prepend-inner-icon="search"
+        solo-inverted
+        height="60"
+        background-color="pink lighten-2"
+        color="grey lighten-3"
+        v-model="annictUserName"
+      ></v-text-field>
+
     </v-navigation-drawer>
     <v-toolbar
       :clipped-left="clipped"
@@ -64,13 +77,16 @@ export default {
       rightDrawer: false,
       title: 'onsen.ag',
       day: "0",
-      checkboxState: false
+      checkboxState: false,
+      annictUserName: ""
     }
   },
   watch: {
     day(val){
       this.$store.dispatch('setfillterDayState', val)
-      
+    },
+    annictUserName(val){
+      this.$store.dispatch('setAnnictUserName', val)
     }
   }
 }

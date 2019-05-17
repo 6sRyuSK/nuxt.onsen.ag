@@ -3,6 +3,7 @@ export const state = () => ({
   programsInfoList: [],
   fillterDayState: "0",
   inputSearchWord: "",
+  annictUserName: "",
 })
 
 export const mutations = {
@@ -17,6 +18,9 @@ export const mutations = {
   setInputSearchWord(state, payload) {
     state.inputSearchWord = payload
   },
+  setAnnictUserName(state, payload) {
+    state.annictUserName = payload
+  },
 }
 
 export const actions = {
@@ -26,6 +30,9 @@ export const actions = {
   setInputSearchWord({commit}, payload) {
     commit('setInputSearchWord', payload)
   },
+  setAnnictUserName({commit}, payload) {
+    commit('setAnnictUserName', payload)
+  }
 }
 
 
