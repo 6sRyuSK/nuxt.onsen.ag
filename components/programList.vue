@@ -13,7 +13,6 @@
 <script>
 
 import { mapState } from 'vuex'
-import axiosJsonpAdapter from 'axios-jsonp'
 import getJsonp from '~/plugins/getJsonp'
 import { request, GraphQLClient } from 'graphql-request'
 let programsInfoList
