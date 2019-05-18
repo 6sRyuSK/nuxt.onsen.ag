@@ -70,12 +70,7 @@ export default {
       const promises = Object.keys(searchQueue).map((key) => {
         const item = searchQueue[key];
         const programInfo_getUrl = encodeURI( 'https://www.onsen.ag/data/api/searchMovie?word=' + item)
-        return getJsonp(programInfo_getUrl).then(json => {
-          return json
-        }).catch(err => {
-          console.log("jsonpERR:", err)
-          return err
-        })
+        return getJsonp(programInfo_getUrl)
         
       })
       await Promise.all(promises)
