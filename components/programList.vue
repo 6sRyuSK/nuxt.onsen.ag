@@ -1,6 +1,5 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-btn @click="click">a</v-btn>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <a :href="item.moviePath">
@@ -97,10 +96,6 @@ export default {
     clientInitialize() {
       this.client = new GraphQLClient(this.endPoint, { headers: {Authorization: "Bearer 665698b3e3df57bb247c422dfe42b78cf40585a70afb3781d17ccc8699584df5"}})
     },
-    click(){
-      // console.log(this.userWatching)
-      console.log(this.searchByAnnict)
-    }
   },
   created() {
     this.debouncedSearchProgram = _.debounce(this.searchProgram, 250)
