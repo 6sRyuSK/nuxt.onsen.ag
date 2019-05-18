@@ -27,7 +27,8 @@
         height="60"
         background-color="pink lighten-2"
         color="grey lighten-3"
-        v-model="annictUserName"
+        v-model="annictUsername"
+        @keyup.enter = "inputAnnictUsername"
       ></v-text-field>
 
     </v-navigation-drawer>
@@ -78,15 +79,17 @@ export default {
       title: 'onsen.ag',
       day: "0",
       checkboxState: false,
-      annictUserName: ""
+      annictUsername: ""
     }
   },
   watch: {
     day(val){
       this.$store.dispatch('setfillterDayState', val)
     },
-    annictUserName(val){
-      this.$store.dispatch('setAnnictUserName', val)
+  },
+  methods: {
+    inputAnnictUsername() {
+      this.$store.dispatch('setAnnictUserName', this.annictUsername)
     }
   }
 }
