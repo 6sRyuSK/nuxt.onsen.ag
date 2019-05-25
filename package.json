@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/index.js",
+    "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -22,7 +22,6 @@
   "devDependencies": {
     "nodemon": "^1.18.9",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "vue-jsonp": "^0.1.8"
+    "stylus-loader": "^3.0.2"
   }
 }
