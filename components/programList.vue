@@ -32,15 +32,12 @@ export default {
         this.programList = programsInfoList
         return
       }
-      const list = await this.$jsonp(
-          'https://www.onsen.ag/data/api/searchMovie',
-          {word: this.inputSearchWord, callbackName:'callback' })
-        .then(json => {
-          return json.result
-        }).catch(err => {
-          console.log("jsonpERR:", err)
-      })
-      this.fillterBySearchList(list)
+      const programInfo_getUrl = `https://www.onsen.ag/data/api/searchMovie?word=${this.inputSearchWord}`
+      getJsonp(programInfo_getUrl)
+      const vm = this
+      window["callback"] = function(json) {
+        vm.fillterBySearchList(json.result)
+      }
     },
     fillterBySearchList(list){
       this.programList = programsInfoList.filter(a => {
@@ -56,17 +53,12 @@ export default {
         this.programList = programsInfoList
         return
       }
-      // const search = ["fairygone", "shieldheroanime"]
-      
-      // const getUrl = encodeURI( 'https://www.onsen.ag/data/api/searchMovie?word=fairygone')
       let jsonlist = []
       const vm = this
       window["callback"] = function(json) {
         jsonlist.push(...json.result)
-        // console.log(jsonlist)
         vm.searchByAnnict = jsonlist
       }
-      // console.log(searchQueue, "--")
       const promises = Object.keys(searchQueue).map((key) => {
         const item = searchQueue[key];
         const programInfo_getUrl = encodeURI( 'https://www.onsen.ag/data/api/searchMovie?word=' + item)

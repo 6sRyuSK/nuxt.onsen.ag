@@ -42,7 +42,6 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
-    '~/plugins/vue-jsonp'
   ],
 
   /*
