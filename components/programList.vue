@@ -1,10 +1,31 @@
 <template>
   <v-container fluid grid-list-sm>
+    <v-layout row wrap class="player" v-if="nowPlaying">
+      <v-flex md4 style="width:30%" class="player-img">
+        <v-img v-bind:src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`"></v-img>
+      </v-flex>
+      <v-flex md8 class="programInfo">
+        <h2 class="item">{{nowPlaying.title}}</h2>
+        <h3 class="item">{{nowPlaying.update.toLocaleDateString("ja-JP", {year:'numeric',month:'long',day:'numeric'})}}</h3>
+        <h3 class="item">{{nowPlaying.personality}}</h3>
+        <audio v-bind:src="nowPlaying.moviePath" controls style="width:100%; bottom:0;" class="mp3Player"/>
+      </v-flex>
+      
+    </v-layout>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
-        <a :href="item.moviePath">
+        <!-- <a :href="item.moviePath">
           <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%"/>
-        </a>
+        </a> -->
+        <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%" @click="() =>clickProgramPanel(item)">
+          <!-- <v-card v-if="item.title == isShow" height="100%" :class="panelCard">
+            <v-card-text>
+              {{item.title}}
+              <audio :src="item.moviePath" controls style="width: 100%"/>
+            </v-card-text>
+          </v-card> -->
+        </v-img>
+        
       </v-flex>
     </v-layout>
   </v-container>
@@ -24,9 +45,23 @@ export default {
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
       searchByAnnict: [],
+      // isShow: "普通にラジオをお届けしたいラフタリアとフィーロ",
+      // panelCard: "panel-card",
+      nowPlaying: "",
     }
   },
   methods: {
+    clickProgramPanel(item) {
+      this.panelCard = "panel-card"
+      this.isShow = item.title
+      this.$nextTick(() => {
+        this.panelCard = ""
+      });  
+      console.log(item)
+      this.nowPlaying = item
+      // console.log(item.title, this.isShow)
+      // console.log("aaaaaaaaaaaa")
+    },
     async searchProgram() {
       if(this.inputSearchWord === ''){
         this.programList = programsInfoList
@@ -127,3 +162,26 @@ export default {
   
 }
 </script>
+<style>
+.panel-card {
+  transform: translateY(450px);
+}
+.player {
+  width: 100%;
+  padding: 10px;
+}
+.player-img {
+  width: 30%;
+}
+.programInfo {
+  padding: 5px;
+  position: relative;
+}
+.programInfo > item {
+  margin-bottom: 5px;
+}
+@media screen and (min-width: 1024px) { 
+  .mp3Player {position:absolute; }
+}
+
+</style>
