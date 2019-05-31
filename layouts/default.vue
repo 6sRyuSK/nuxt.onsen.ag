@@ -7,7 +7,7 @@
       fixed
       app
     >
-      <v-radio-group v-model="day" :mandatory="false">
+      <v-radio-group v-model="fillterState" :mandatory="false">
         <v-radio label="All" value="0"></v-radio>
         <v-radio label="月曜" value="1"></v-radio>
         <v-radio label="火曜" value="2"></v-radio>
@@ -15,6 +15,7 @@
         <v-radio label="木曜" value="4"></v-radio>
         <v-radio label="金曜" value="5"></v-radio>
         <v-radio label="土曜・日曜" value="6"></v-radio>
+        <v-radio label="お気に入り" value="7"></v-radio>
       </v-radio-group>
 
       <v-text-field
@@ -77,14 +78,14 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'onsen.ag',
-      day: "0",
+      fillterState: "0",
       checkboxState: false,
       annictUsername: ""
     }
   },
   watch: {
-    day(val){
-      this.$store.dispatch('setfillterDayState', val)
+    fillterState(val){
+      this.$store.dispatch('setfillterState', val)
     },
   },
   methods: {

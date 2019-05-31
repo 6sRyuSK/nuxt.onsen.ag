@@ -1,9 +1,10 @@
 export const strict = false
 export const state = () => ({
   programsInfoList: [],
-  fillterDayState: "0",
+  fillterState: "0",
   inputSearchWord: "",
   annictUserName: "",
+  favoriteProgram: [],
 })
 
 export const mutations = {
@@ -12,8 +13,8 @@ export const mutations = {
     state.programsInfoList = payload
     // console.log(state.programsInfoList)
   },
-  setfillterDayState(state, payload) {
-    state.fillterDayState = payload
+  setfillterState(state, payload) {
+    state.fillterState = payload
   },
   setInputSearchWord(state, payload) {
     state.inputSearchWord = payload
@@ -21,17 +22,29 @@ export const mutations = {
   setAnnictUserName(state, payload) {
     state.annictUserName = payload
   },
+  addFavoriteProgram(state, payload) {
+    state.favoriteProgram.push(payload)
+  },
+  removeFavoriteProgram(state, payload) {
+    state.favoriteProgram = state.favoriteProgram.filter(val => val != payload)
+  }
 }
 
 export const actions = {
-  setfillterDayState({commit}, payload) {
-    commit('setfillterDayState', payload)
+  setfillterState({commit}, payload) {
+    commit('setfillterState', payload)
   },
   setInputSearchWord({commit}, payload) {
     commit('setInputSearchWord', payload)
   },
   setAnnictUserName({commit}, payload) {
     commit('setAnnictUserName', payload)
+  },
+  addFavoriteProgram({commit}, payload) {
+    commit('addFavoriteProgram', payload)
+  },
+  removeFavoriteProgram({commit}, payload) {
+    commit('removeFavoriteProgram', payload)
   }
 }
 

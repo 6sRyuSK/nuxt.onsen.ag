@@ -2,7 +2,17 @@
   <v-container fluid grid-list-sm>
     <v-layout row wrap class="player" v-if="nowPlaying">
       <v-flex md4 style="width:30%" class="player-img">
-        <v-img v-bind:src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`"></v-img>
+        <v-img v-bind:src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`">
+          <v-layout>
+            <v-spacer/>
+            <v-btn flat large icon @click="addFavorite(nowPlaying.url)" v-if="favoriteProgram.find(item => item == nowPlaying.url)">
+              <v-icon large color="pink">favorite</v-icon>
+            </v-btn>
+            <v-btn flat large icon @click="addFavorite(nowPlaying.url)" v-else>
+              <v-icon large color="grey darken-3">favorite_border</v-icon>
+            </v-btn>
+          </v-layout>
+        </v-img>
       </v-flex>
       <v-flex md8 class="programInfo">
         <h2 class="item title">{{nowPlaying.title}}</h2>
@@ -59,8 +69,13 @@ export default {
       });  
       console.log(item)
       this.nowPlaying = item
-      // console.log(item.title, this.isShow)
-      // console.log("aaaaaaaaaaaa")
+    },
+    addFavorite(item) {
+      if(this.favoriteProgram.find(val => val == item)){
+        this.$store.dispatch('removeFavoriteProgram', item)
+      } else {
+        this.$store.dispatch('addFavoriteProgram', item)
+      }
     },
     async searchProgram() {
       if(this.inputSearchWord === ''){
@@ -124,25 +139,31 @@ export default {
     this.clientInitialize()
   },
   computed: {
-    fillterDayState() {
-      return this.$store.state.fillterDayState
+    fillterState() {
+      return this.$store.state.fillterState
     },
     inputSearchWord() {
       return this.$store.state.inputSearchWord
     },
     annictUserName() {
       return this.$store.state.annictUserName
+    },
+    favoriteProgram() {
+      return this.$store.state.favoriteProgram
     }
   },
   watch: {
-    fillterDayState(val) {
+    fillterState(val) {
       if(val == 0) {
         return this.programList = programsInfoList
+      } else if(1 <= val && val <= 6) {
+        this.programList = [...programsInfoList].filter(a => {
+          const day = new Date(a.update).getDay().toString()
+          return day.match(val)
+        })
+      } else if(val == 7) {
+        this.fillterBySearchList(this.favoriteProgram)
       }
-      this.programList = [...programsInfoList].filter(a => {
-        const day = new Date(a.update).getDay().toString()
-        return day.match(val)
-      })
     },
     inputSearchWord(val) {
       this.debouncedSearchProgram()
