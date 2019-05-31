@@ -5,10 +5,10 @@
         <v-img v-bind:src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`"></v-img>
       </v-flex>
       <v-flex md8 class="programInfo">
-        <h2 class="item">{{nowPlaying.title}}</h2>
+        <h2 class="item title">{{nowPlaying.title}}</h2>
         <h3 class="item">{{nowPlaying.update.toLocaleDateString("ja-JP", {year:'numeric',month:'long',day:'numeric'})}}</h3>
         <h3 class="item">{{nowPlaying.personality}}</h3>
-        <audio v-bind:src="nowPlaying.moviePath" controls style="width:100%; bottom:0;" class="mp3Player"/>
+        <audio v-bind:src="nowPlaying.moviePath" controls autoplay style="width:100%; bottom:0;" class="mp3Player"/>
       </v-flex>
       
     </v-layout>
@@ -162,7 +162,7 @@ export default {
   
 }
 </script>
-<style>
+<style scoped>
 .panel-card {
   transform: translateY(450px);
 }
@@ -179,6 +179,9 @@ export default {
 }
 .programInfo > item {
   margin-bottom: 5px;
+}
+.programInfo > title {
+  font-size: 5vw;
 }
 @media screen and (min-width: 1024px) { 
   .mp3Player {position:absolute; }
