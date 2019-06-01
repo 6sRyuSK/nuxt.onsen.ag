@@ -1,6 +1,5 @@
 export const strict = false
 export const state = () => ({
-  programsInfoList: [],
   fillterState: "0",
   inputSearchWord: "",
   annictUserName: "",
@@ -8,11 +7,6 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setprogramsInfoList(state, payload) {
-    // console.log('payload', payload)
-    state.programsInfoList = payload
-    // console.log(state.programsInfoList)
-  },
   setfillterState(state, payload) {
     state.fillterState = payload
   },
@@ -45,12 +39,5 @@ export const actions = {
   },
   removeFavoriteProgram({commit}, payload) {
     commit('removeFavoriteProgram', payload)
-  }
-}
-
-
-export const getters = {
-  programsInfoList(state) {
-    return state.programsInfoList
   }
 }

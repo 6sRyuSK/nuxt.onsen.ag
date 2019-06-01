@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <inputSearch />
-    <programList />
+    <programList :programsInfoList="programInfoList" />
   </section>
 </template>
 
@@ -24,7 +24,9 @@ export default {
     })
     
     const programInfoList = await getProgramInfo(res)
-    store.commit('setprogramsInfoList', programInfoList)
+    return {
+      programInfoList
+    }
   }
   
   

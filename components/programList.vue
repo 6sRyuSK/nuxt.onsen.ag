@@ -45,12 +45,10 @@
 import { mapState } from 'vuex'
 import getJsonp from '~/plugins/getJsonp'
 import { request, GraphQLClient } from 'graphql-request'
-let programsInfoList
 export default {
   data(){
-    programsInfoList = this.$store.getters.programsInfoList
     return{
-      programList : programsInfoList,
+      programList : this.programsInfoList,
       client: 0,
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
@@ -79,7 +77,7 @@ export default {
     },
     async searchProgram() {
       if(this.inputSearchWord === ''){
-        this.programList = programsInfoList
+        this.programList = this.programsInfoList
         return
       }
       const programInfo_getUrl = `https://www.onsen.ag/data/api/searchMovie?word=${this.inputSearchWord}`
@@ -90,7 +88,7 @@ export default {
       }
     },
     fillterBySearchList(list){
-      this.programList = programsInfoList.filter(a => {
+      this.programList = this.programsInfoList.filter(a => {
         let hit
         list.forEach(function(val) {
           if(a.url == val) hit = a
@@ -100,7 +98,7 @@ export default {
     },
     async annictSearchProgram(searchQueue) {
       if(searchQueue === ''){
-        this.programList = programsInfoList
+        this.programList = this.programsInfoList
         return
       }
       let jsonlist = []
@@ -155,9 +153,9 @@ export default {
   watch: {
     fillterState(val) {
       if(val == 0) {
-        return this.programList = programsInfoList
+        return this.programList = this.programsInfoList
       } else if(1 <= val && val <= 6) {
-        this.programList = [...programsInfoList].filter(a => {
+        this.programList = this.programsInfoList.filter(a => {
           const day = new Date(a.update).getDay().toString()
           return day.match(val)
         })
@@ -179,6 +177,9 @@ export default {
       console.log(val)
       this.fillterBySearchList(val)
     }
+  },
+  props: {
+    programsInfoList: Array
   }
   
 }
