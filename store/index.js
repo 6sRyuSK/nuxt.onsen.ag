@@ -4,6 +4,7 @@ export const state = () => ({
   inputSearchWord: "",
   annictUserName: "",
   favoriteProgram: [],
+  isAutoplay: false,
 })
 
 export const mutations = {
@@ -21,7 +22,10 @@ export const mutations = {
   },
   removeFavoriteProgram(state, payload) {
     state.favoriteProgram = state.favoriteProgram.filter(val => val != payload)
-  }
+  },
+  setAutoplay(state, payload) {
+    state.isAutoplay = payload
+  },
 }
 
 export const actions = {
@@ -39,5 +43,8 @@ export const actions = {
   },
   removeFavoriteProgram({commit}, payload) {
     commit('removeFavoriteProgram', payload)
-  }
+  },
+  setAutoplay({commit}, payload) {
+    commit('setAutoplay', payload)
+  },
 }

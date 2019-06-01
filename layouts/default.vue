@@ -18,6 +18,8 @@
         <v-radio label="お気に入り" value="7"></v-radio>
       </v-radio-group>
 
+      <v-checkbox v-model="isAutoplay" label="Autoplay"></v-checkbox>
+
       <v-text-field
         append-icon="mic"
         class="mx-3"
@@ -80,17 +82,29 @@ export default {
       title: 'onsen.ag',
       fillterState: "0",
       checkboxState: false,
-      annictUsername: ""
+      annictUsername: "",
+      isAutoplay: false,
     }
+  },
+  created() {
+    this.isAutoplay = this.preIsAutoplay
   },
   watch: {
     fillterState(val){
       this.$store.dispatch('setfillterState', val)
     },
+    isAutoplay(val) {
+      this.$store.dispatch('setAutoplay', val)
+    }
   },
   methods: {
     inputAnnictUsername() {
       this.$store.dispatch('setAnnictUserName', this.annictUsername)
+    }
+  },
+  computed: {
+    preIsAutoplay() {
+      return this.$store.state.isAutoplay
     }
   }
 }
