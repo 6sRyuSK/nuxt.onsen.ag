@@ -42,6 +42,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
+    '~/plugins/cookie-storage.js',
   ],
 
   /*

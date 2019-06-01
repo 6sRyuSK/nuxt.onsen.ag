@@ -16,6 +16,9 @@ export default {
     programList,
     inputSearch,
   },
+  created() {
+    this.$store.dispatch('setfillterState', "0")
+  },
   async asyncData({ store }) {
     const programList_baseUrl = 'https://www.onsen.ag/api/shownMovie/shownMovie.json'
     const programList_getUrl = encodeURI(programList_baseUrl)
