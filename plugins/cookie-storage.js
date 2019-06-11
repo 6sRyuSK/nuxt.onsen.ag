@@ -11,7 +11,7 @@ export default ({ store, req, isDev }) => {
           ? Cookies.getJSON(key)
           : cookie.parse(req.headers.cookie || '')[key],
       setItem: (key, value) =>
-        Cookies.set(key, value, { secure: !isDev }),
+        Cookies.set(key, value, { secure: !isDev, expires: 365 * 15 }),
       removeItem: key => Cookies.remove(key)
     }
   })(store)
