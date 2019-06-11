@@ -45,6 +45,8 @@
 import { mapState } from 'vuex'
 import getJsonp from '~/plugins/getJsonp'
 import { request, GraphQLClient } from 'graphql-request'
+import goTo from 'vuetify/lib/components/Vuetify/goTo'
+
 export default {
   data(){
     return{
@@ -67,6 +69,8 @@ export default {
       });  
       console.log(item)
       this.nowPlaying = item
+      goTo(0)
+
     },
     addFavorite(item) {
       if(this.favoriteProgram.find(val => val == item)){
