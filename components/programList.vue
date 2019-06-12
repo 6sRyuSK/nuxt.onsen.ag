@@ -5,11 +5,11 @@
         <v-img v-bind:src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`">
           <v-layout>
             <v-spacer/>
-            <v-btn flat large icon @click="addFavorite(nowPlaying.url)" v-if="favoriteProgram.find(item => item == nowPlaying.url)">
-              <v-icon large color="pink">favorite</v-icon>
+            <v-btn icon @click="addFavorite(nowPlaying.url)" v-if="favoriteProgram.find(item => item == nowPlaying.url)">
+              <v-icon color="pink lighten-2">fas fa-heart</v-icon>
             </v-btn>
-            <v-btn flat large icon @click="addFavorite(nowPlaying.url)" v-else>
-              <v-icon large color="grey darken-3">favorite_border</v-icon>
+            <v-btn icon color="#eee" @click="addFavorite(nowPlaying.url)" v-else>
+              <v-icon color="pink">far fa-heart</v-icon>
             </v-btn>
           </v-layout>
         </v-img>
