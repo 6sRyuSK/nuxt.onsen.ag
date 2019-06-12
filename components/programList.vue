@@ -16,7 +16,7 @@
       </v-flex>
       <v-flex md8 class="programInfo">
         <h2 class="item title">{{nowPlaying.title}}</h2>
-        <h3 class="item">{{nowPlaying.update.toLocaleDateString("ja-JP", {year:'numeric',month:'long',day:'numeric'})}}</h3>
+        <h3 class="item">{{nowPlaying.update.toLocaleDateString("ja-JP", {year:'numeric',month:'long',day:'numeric'})}}: {{nowPlaying.schedule}}</h3>
         <h3 class="item">{{nowPlaying.personality}}</h3>
         <audio v-bind:src="nowPlaying.moviePath" controls :autoplay="isAutoplay" style="width:100%; bottom:0;" class="mp3Player"/>
       </v-flex>
