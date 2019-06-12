@@ -24,7 +24,12 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
-        <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%" @click="() =>clickProgramPanel(item)"></v-img>
+        <v-img 
+          :src="`https://www.onsen.ag${item.thumbnailPath}`" 
+          :class="`image ${favoriteProgram.find(val => val == item.url) ? 'favorite' : ''}`" 
+          width="100%" 
+          @click="() =>clickProgramPanel(item)"
+        ></v-img>
       </v-flex>
     </v-layout>
   </v-container>
@@ -194,4 +199,8 @@ export default {
   .mp3Player {position:absolute; }
 }
 
+.favorite {
+  outline: 7px solid #F50057;
+  outline-offset: -4px;
+}
 </style>
