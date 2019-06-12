@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <inputSearch />
-    <programList :programsInfoList="programInfoList" />
+    <programList :programs-info-list="programInfoList" />
   </section>
 </template>
 
@@ -14,24 +14,23 @@ import getProgramInfo from '~/plugins/getProgramInfo'
 export default {
   components: {
     programList,
-    inputSearch,
-  },
-  created() {
-    this.$store.dispatch('setfillterState', "0")
+    inputSearch
   },
   async asyncData({ store }) {
-    const programList_baseUrl = 'https://www.onsen.ag/api/shownMovie/shownMovie.json'
-    const programList_getUrl = encodeURI(programList_baseUrl)
-    const res = await axios.get(programList_getUrl).then(function(response) {
+    const programListBaseUrl =
+      'https://www.onsen.ag/api/shownMovie/shownMovie.json'
+    const programListGetUrl = encodeURI(programListBaseUrl)
+    const res = await axios.get(programListGetUrl).then(function(response) {
       return response.data.result
     })
-    
+
     const programInfoList = await getProgramInfo(res)
     return {
       programInfoList
     }
+  },
+  created() {
+    this.$store.dispatch('setfillterState', '0')
   }
-  
-  
 }
 </script>

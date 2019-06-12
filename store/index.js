@@ -1,10 +1,10 @@
 export const strict = false
 export const state = () => ({
-  fillterState: "0",
-  inputSearchWord: "",
-  annictUserName: "",
+  fillterState: '0',
+  inputSearchWord: '',
+  annictUserName: '',
   favoriteProgram: [],
-  isAutoplay: false,
+  isAutoplay: false
 })
 
 export const mutations = {
@@ -21,30 +21,30 @@ export const mutations = {
     state.favoriteProgram.push(payload)
   },
   removeFavoriteProgram(state, payload) {
-    state.favoriteProgram = state.favoriteProgram.filter(val => val != payload)
+    state.favoriteProgram = state.favoriteProgram.filter(val => val !== payload)
   },
   setAutoplay(state, payload) {
     state.isAutoplay = payload
-  },
+  }
 }
 
 export const actions = {
-  setfillterState({commit}, payload) {
+  setfillterState({ commit }, payload) {
     commit('setfillterState', payload)
   },
-  setInputSearchWord({commit}, payload) {
+  setInputSearchWord({ commit }, payload) {
     commit('setInputSearchWord', payload)
   },
-  setAnnictUserName({commit}, payload) {
+  setAnnictUserName({ commit }, payload) {
     commit('setAnnictUserName', payload)
   },
-  addFavoriteProgram({commit}, payload) {
+  addFavoriteProgram({ commit }, payload) {
     commit('addFavoriteProgram', payload)
   },
-  removeFavoriteProgram({commit}, payload) {
+  removeFavoriteProgram({ commit }, payload) {
     commit('removeFavoriteProgram', payload)
   },
-  setAutoplay({commit}, payload) {
+  setAutoplay({ commit }, payload) {
     commit('setAutoplay', payload)
-  },
+  }
 }

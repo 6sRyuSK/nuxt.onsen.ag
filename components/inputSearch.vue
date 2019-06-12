@@ -1,17 +1,17 @@
 <template>
   <section>
     <v-text-field
-        append-icon="mic"
-        class="mx-3"
-        flat
-        label="Search"
-        prepend-inner-icon="search"
-        solo-inverted
-        height="60"
-        background-color="pink lighten-2"
-        color="grey lighten-3"
-        v-model="inputSearchWord"
-      ></v-text-field>
+      v-model="inputSearchWord"
+      append-icon="mic"
+      class="mx-3"
+      flat
+      label="Search"
+      prepend-inner-icon="search"
+      solo-inverted
+      height="60"
+      background-color="pink lighten-2"
+      color="grey lighten-3"
+    />
   </section>
 </template>
 
@@ -19,7 +19,7 @@
 export default {
   data() {
     return {
-      inputSearchWord: ""
+      inputSearchWord: ''
     }
   },
   watch: {
@@ -29,4 +29,3 @@ export default {
   }
 }
 </script>
-
