@@ -2,7 +2,6 @@
   <v-app>
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
@@ -64,21 +63,6 @@ export default {
       clipped: true,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: 'onsen.ag',
       fillterState: "0",
       checkboxState: false,
