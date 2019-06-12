@@ -51,6 +51,18 @@ export default {
         vm.fillterBySearchList(json.result)
       }
     },
+    fillterByTag(val) {
+      if(val == 0) {
+        return this.programList = this.programsInfoList
+      } else if(1 <= val && val <= 6) {
+        this.programList = this.programsInfoList.filter(a => {
+          const day = new Date(a.update).getDay().toString()
+          return day.match(val)
+        })
+      } else if(val == 7) {
+        this.fillterBySearchList(this.favoriteProgram)
+      }
+    },
     fillterBySearchList(list){
       this.programList = this.programsInfoList.filter(a => {
         let hit
@@ -58,6 +70,18 @@ export default {
           if(a.url == val) hit = a
         })
         return hit
+      })
+    },
+    getUserWatching(annictUserName) {
+      const query = `
+        query { user( username: "${annictUserName}" ) { name works { edges{node {
+        twitterUsername
+      }} }} }
+      `
+      this.client.request(query).then(data => {
+        return this.userWatching = data.user.works.edges.map(val => {
+          return val.node.twitterUsername
+        })
       })
     },
     async annictSearchProgram(searchQueue) {
@@ -78,26 +102,11 @@ export default {
         
       })
       await Promise.all(promises)
-    },
-    getUserWatching(annictUserName) {
-      const query = `
-        query { user( username: "${annictUserName}" ) { name works { edges{node {
-        twitterUsername
-      }} }} }
-      `
-      this.client.request(query).then(data => {
-        return this.userWatching = data.user.works.edges.map(val => {
-          return val.node.twitterUsername
-        })
-      })
-    },
-    clientInitialize() {
-      this.client = new GraphQLClient(this.endPoint, { headers: {Authorization: "Bearer 665698b3e3df57bb247c422dfe42b78cf40585a70afb3781d17ccc8699584df5"}})
-    },
+    }
   },
   created() {
     this.debouncedSearchProgram = _.debounce(this.searchProgram, 250)
-    this.clientInitialize()
+    this.client = new GraphQLClient(this.endPoint, { headers: {Authorization: "Bearer 665698b3e3df57bb247c422dfe42b78cf40585a70afb3781d17ccc8699584df5"}})
   },
   computed: {
     fillterState() {
@@ -118,16 +127,7 @@ export default {
   },
   watch: {
     fillterState(val) {
-      if(val == 0) {
-        return this.programList = this.programsInfoList
-      } else if(1 <= val && val <= 6) {
-        this.programList = this.programsInfoList.filter(a => {
-          const day = new Date(a.update).getDay().toString()
-          return day.match(val)
-        })
-      } else if(val == 7) {
-        this.fillterBySearchList(this.favoriteProgram)
-      }
+      fillterByTag(val)
     },
     inputSearchWord(val) {
       this.debouncedSearchProgram()
