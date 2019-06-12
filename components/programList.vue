@@ -24,18 +24,7 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
-        <!-- <a :href="item.moviePath">
-          <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%"/>
-        </a> -->
-        <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%" @click="() =>clickProgramPanel(item)">
-          <!-- <v-card v-if="item.title == isShow" height="100%" :class="panelCard">
-            <v-card-text>
-              {{item.title}}
-              <audio :src="item.moviePath" controls style="width: 100%"/>
-            </v-card-text>
-          </v-card> -->
-        </v-img>
-        
+        <v-img :src="`https://www.onsen.ag${item.thumbnailPath}`" class="image" width="100%" @click="() =>clickProgramPanel(item)"></v-img>
       </v-flex>
     </v-layout>
   </v-container>
@@ -55,22 +44,13 @@ export default {
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
       searchByAnnict: [],
-      // isShow: "普通にラジオをお届けしたいラフタリアとフィーロ",
-      // panelCard: "panel-card",
       nowPlaying: "",
     }
   },
   methods: {
     clickProgramPanel(item) {
-      this.panelCard = "panel-card"
-      this.isShow = item.title
-      this.$nextTick(() => {
-        this.panelCard = ""
-      });  
-      console.log(item)
       this.nowPlaying = item
       goTo(0)
-
     },
     addFavorite(item) {
       if(this.favoriteProgram.find(val => val == item)){
@@ -125,7 +105,6 @@ export default {
         twitterUsername
       }} }} }
       `
-      // console.log(annictUserName, "---")
       this.client.request(query).then(data => {
         return this.userWatching = data.user.works.edges.map(val => {
           return val.node.twitterUsername
@@ -177,7 +156,6 @@ export default {
       this.getUserWatching(val)
     },
     userWatching(val) {
-      // console.log(val)
       this.annictSearchProgram(val)
     },
     searchByAnnict(val) {
