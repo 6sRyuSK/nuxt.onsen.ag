@@ -16,11 +16,11 @@ export default {
     programList,
     inputSearch
   },
-  async asyncData({ store }) {
+  async asyncData ({ store }) {
     const programListBaseUrl =
       'https://www.onsen.ag/api/shownMovie/shownMovie.json'
     const programListGetUrl = encodeURI(programListBaseUrl)
-    const res = await axios.get(programListGetUrl).then(function(response) {
+    const res = await axios.get(programListGetUrl).then(function (response) {
       return response.data.result
     })
 
@@ -29,7 +29,7 @@ export default {
       programInfoList
     }
   },
-  created() {
+  created () {
     this.$store.dispatch('setfillterState', '0')
   }
 }

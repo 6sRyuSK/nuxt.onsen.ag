@@ -54,12 +54,12 @@ export default {
     nowPlaying: Object
   },
   computed: {
-    favoriteProgram() {
+    favoriteProgram () {
       return this.$store.state.favoriteProgram
     }
   },
   methods: {
-    addFavorite(item) {
+    addFavorite (item) {
       if (this.favoriteProgram.find(val => val === item)) {
         this.$store.dispatch('removeFavoriteProgram', item)
       } else {

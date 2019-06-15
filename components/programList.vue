@@ -31,7 +31,7 @@ export default {
   props: {
     programsInfoList: Array
   },
-  data() {
+  data () {
     return {
       programList: this.programsInfoList,
       client: 0,
@@ -42,41 +42,41 @@ export default {
     }
   },
   computed: {
-    fillterState() {
+    fillterState () {
       return this.$store.state.fillterState
     },
-    inputSearchWord() {
+    inputSearchWord () {
       return this.$store.state.inputSearchWord
     },
-    annictUserName() {
+    annictUserName () {
       return this.$store.state.annictUserName
     },
-    favoriteProgram() {
+    favoriteProgram () {
       return this.$store.state.favoriteProgram
     },
-    isAutoplay() {
+    isAutoplay () {
       return this.$store.state.isAutoplay
     }
   },
   watch: {
-    fillterState(val) {
+    fillterState (val) {
       this.fillterByTag(val)
     },
-    inputSearchWord(val) {
+    inputSearchWord (val) {
       this.debouncedSearchProgram()
     },
-    annictUserName(val) {
+    annictUserName (val) {
       this.getUserWatching(val)
     },
-    userWatching(val) {
+    userWatching (val) {
       this.annictSearchProgram(val)
     },
-    searchByAnnict(val) {
+    searchByAnnict (val) {
       console.log(val)
       this.fillterBySearchList(val)
     }
   },
-  created() {
+  created () {
     this.debouncedSearchProgram = _.debounce(this.searchProgram, 250)
     this.client = new GraphQLClient(this.endPoint, {
       headers: {
@@ -86,11 +86,11 @@ export default {
     })
   },
   methods: {
-    clickProgramPanel(item) {
+    clickProgramPanel (item) {
       this.nowPlaying = item
       goTo(0)
     },
-    searchProgram() {
+    searchProgram () {
       if (this.inputSearchWord === '') {
         this.programList = this.programsInfoList
         return
@@ -98,15 +98,15 @@ export default {
       const programInfoGetUrl = `https://www.onsen.ag/data/api/searchMovie?word=${this.inputSearchWord}`
       getJsonp(programInfoGetUrl)
       const vm = this
-      window.callback = function(json) {
+      window.callback = function (json) {
         vm.fillterBySearchList(json.result)
       }
     },
-    fillterByTag(val) {
+    fillterByTag (val) {
       if (val === 0) {
         return (this.programList = this.programsInfoList)
       } else if (val >= 1 && val <= 6) {
-        this.programList = this.programsInfoList.filter(a => {
+        this.programList = this.programsInfoList.filter((a) => {
           const day = new Date(a.update).getDay().toString()
           return day.match(val)
         })
@@ -114,39 +114,39 @@ export default {
         this.fillterBySearchList(this.favoriteProgram)
       }
     },
-    fillterBySearchList(list) {
-      this.programList = this.programsInfoList.filter(a => {
+    fillterBySearchList (list) {
+      this.programList = this.programsInfoList.filter((a) => {
         let hit
-        list.forEach(function(val) {
+        list.forEach(function (val) {
           if (a.url === val) hit = a
         })
         return hit
       })
     },
-    getUserWatching(annictUserName) {
+    getUserWatching (annictUserName) {
       const query = `
         query { user( username: "${annictUserName}" ) { name works { edges{node {
         twitterUsername
       }} }} }
       `
-      this.client.request(query).then(data => {
-        return (this.userWatching = data.user.works.edges.map(val => {
+      this.client.request(query).then((data) => {
+        return (this.userWatching = data.user.works.edges.map((val) => {
           return val.node.twitterUsername
         }))
       })
     },
-    async annictSearchProgram(searchQueue) {
+    async annictSearchProgram (searchQueue) {
       if (searchQueue === '') {
         this.programList = this.programsInfoList
         return
       }
       const jsonlist = []
       const vm = this
-      window.callback = function(json) {
+      window.callback = function (json) {
         jsonlist.push(...json.result)
         vm.searchByAnnict = jsonlist
       }
-      const promises = Object.keys(searchQueue).map(key => {
+      const promises = Object.keys(searchQueue).map((key) => {
         const item = searchQueue[key]
         const programInfoGetUrl = encodeURI(
           'https://www.onsen.ag/data/api/searchMovie?word=' + item

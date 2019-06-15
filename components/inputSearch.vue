@@ -17,13 +17,13 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       inputSearchWord: ''
     }
   },
   watch: {
-    inputSearchWord(val) {
+    inputSearchWord (val) {
       this.$store.dispatch('setInputSearchWord', val)
     }
   }
