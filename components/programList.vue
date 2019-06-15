@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying :now-playing="nowPlaying" />
+    <nowPlaying :now-playing="nowPlaying" v-if="JSON.stringify(nowPlaying) != '{}'"/>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
@@ -38,7 +38,7 @@ export default {
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
       searchByAnnict: [],
-      nowPlaying: ''
+      nowPlaying: {}
     }
   },
   computed: {
@@ -103,14 +103,14 @@ export default {
       }
     },
     fillterByTag (val) {
-      if (val === 0) {
-        return (this.programList = this.programsInfoList)
+      if (val === '0') {
+        this.programList = this.programsInfoList
       } else if (val >= 1 && val <= 6) {
         this.programList = this.programsInfoList.filter((a) => {
           const day = new Date(a.update).getDay().toString()
           return day.match(val)
         })
-      } else if (val === 7) {
+      } else if (val === '7') {
         this.fillterBySearchList(this.favoriteProgram)
       }
     },

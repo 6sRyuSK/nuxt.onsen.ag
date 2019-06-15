@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="nowPlaying" row wrap class="player">
+  <v-layout v-if="nowPlaying != {}" row wrap class="player">
     <v-flex md4 style="width:30%" class="player-img">
       <v-img :src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`">
         <v-layout>
