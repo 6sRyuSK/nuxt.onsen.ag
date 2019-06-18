@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying :now-playing="nowPlaying" v-if="JSON.stringify(nowPlaying) != '{}'"/>
+    <nowPlaying :now-playing="nowPlaying" :isAutoplay="isAutoplay" v-if="JSON.stringify(nowPlaying) != '{}'"/>
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
