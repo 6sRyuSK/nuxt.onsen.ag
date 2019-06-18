@@ -29,7 +29,7 @@
       />
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" fixed app>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
+      <v-toolbar-side-icon @click="setDrawer" />
       <v-toolbar-title v-text="title" />
     </v-toolbar>
     <v-content>
@@ -48,7 +48,6 @@ export default {
   data () {
     return {
       clipped: true,
-      drawer: false,
       fixed: false,
       title: 'onsen.ag',
       filterState: '0',
@@ -60,6 +59,9 @@ export default {
   computed: {
     preIsAutoplay () {
       return this.$store.state.autoplay
+    },
+    drawer () {
+      return this.$store.state.drawer
     }
   },
   watch: {
@@ -76,6 +78,9 @@ export default {
   methods: {
     inputAnnictUsername () {
       this.$store.dispatch('setAnnictUserName', this.annictUsername)
+    },
+    setDrawer () {
+      this.$store.dispatch('setDrawer')
     }
   }
 }

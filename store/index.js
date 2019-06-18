@@ -4,7 +4,8 @@ export const state = () => ({
   inputSearchWord: '',
   annictUserName: '',
   favoriteProgram: [],
-  autoplay: false
+  autoplay: false,
+  drawer: false
 })
 
 export const mutations = {
@@ -25,6 +26,9 @@ export const mutations = {
   },
   setAutoplay (state, payload) {
     state.autoplay = payload
+  },
+  setDrawer (state) {
+    state.drawer = !state.drawer
   }
 }
 
@@ -46,5 +50,8 @@ export const actions = {
   },
   setAutoplay ({ commit }, payload) {
     commit('setAutoplay', payload)
+  },
+  setDrawer ({ commit }) {
+    commit('setDrawer')
   }
 }
