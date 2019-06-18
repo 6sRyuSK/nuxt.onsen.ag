@@ -13,13 +13,13 @@
       </v-radio-group>
 
       <v-checkbox v-model="autoplay" label="Autoplay" />
-
+      <label for="searchByAnnict">Search by username of the Annict.com (beta)</label>
       <v-text-field
         v-model="annictUsername"
-        append-icon="mic"
+        name="searchByAnnict"
         class="mx-3"
         flat
-        label="Search"
+        label="input your username"
         prepend-inner-icon="search"
         solo-inverted
         height="60"
