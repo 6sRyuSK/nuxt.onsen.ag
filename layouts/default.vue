@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       clipped: true,
       drawer: false,
@@ -58,23 +58,23 @@ export default {
     }
   },
   computed: {
-    preIsAutoplay() {
+    preIsAutoplay () {
       return this.$store.state.isAutoplay
     }
   },
   watch: {
-    fillterState(val) {
+    fillterState (val) {
       this.$store.dispatch('setfillterState', val)
     },
-    isAutoplay(val) {
+    isAutoplay (val) {
       this.$store.dispatch('setAutoplay', val)
     }
   },
-  created() {
+  created () {
     this.isAutoplay = this.preIsAutoplay
   },
   methods: {
-    inputAnnictUsername() {
+    inputAnnictUsername () {
       this.$store.dispatch('setAnnictUserName', this.annictUsername)
     }
   }

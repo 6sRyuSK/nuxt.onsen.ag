@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="nowPlaying" row wrap class="player">
+  <v-layout v-if="nowPlaying != {}" row wrap class="player">
     <v-flex md4 style="width:30%" class="player-img">
       <v-img :src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`">
         <v-layout>
@@ -51,15 +51,16 @@
 <script>
 export default {
   props: {
-    nowPlaying: Object
+    nowPlaying: Object,
+    isAutoplay: Boolean
   },
   computed: {
-    favoriteProgram() {
+    favoriteProgram () {
       return this.$store.state.favoriteProgram
     }
   },
   methods: {
-    addFavorite(item) {
+    addFavorite (item) {
       if (this.favoriteProgram.find(val => val === item)) {
         this.$store.dispatch('removeFavoriteProgram', item)
       } else {
