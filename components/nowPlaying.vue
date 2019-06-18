@@ -40,7 +40,7 @@
       <audio
         :src="nowPlaying.moviePath"
         controls
-        :autoplay="isAutoplay"
+        :autoplay="autoplay"
         style="width:100%; bottom:0;"
         class="mp3Player"
       />

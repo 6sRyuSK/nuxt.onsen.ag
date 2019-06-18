@@ -30,7 +30,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('setfillterState', '0')
+    this.$store.dispatch('setfilterState', '0')
   }
 }
 </script>

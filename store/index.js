@@ -1,6 +1,6 @@
 export const strict = false
 export const state = () => ({
-  fillterState: '0',
+  filterState: '0',
   inputSearchWord: '',
   annictUserName: '',
   favoriteProgram: [],
@@ -8,8 +8,8 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setfillterState (state, payload) {
-    state.fillterState = payload
+  setfilterState (state, payload) {
+    state.filterState = payload
   },
   setInputSearchWord (state, payload) {
     state.inputSearchWord = payload
@@ -29,8 +29,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setfillterState ({ commit }, payload) {
-    commit('setfillterState', payload)
+  setfilterState ({ commit }, payload) {
+    commit('setfilterState', payload)
   },
   setInputSearchWord ({ commit }, payload) {
     commit('setInputSearchWord', payload)

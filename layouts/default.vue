@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
-      <v-radio-group v-model="fillterState" :mandatory="false">
+      <v-radio-group v-model="filterState" :mandatory="false">
         <v-radio label="All" value="0" />
         <v-radio label="月曜" value="1" />
         <v-radio label="火曜" value="2" />
@@ -12,7 +12,7 @@
         <v-radio label="お気に入り" value="7" />
       </v-radio-group>
 
-      <v-checkbox v-model="isAutoplay" label="Autoplay" />
+      <v-checkbox v-model="autoplay" label="Autoplay" />
 
       <v-text-field
         v-model="annictUsername"
@@ -51,27 +51,27 @@ export default {
       drawer: false,
       fixed: false,
       title: 'onsen.ag',
-      fillterState: '0',
+      filterState: '0',
       checkboxState: false,
       annictUsername: '',
-      isAutoplay: false
+      autoplay: false
     }
   },
   computed: {
     preIsAutoplay () {
-      return this.$store.state.isAutoplay
+      return this.$store.state.autoplay
     }
   },
   watch: {
-    fillterState (val) {
-      this.$store.dispatch('setfillterState', val)
+    filterState (val) {
+      this.$store.dispatch('setfilterState', val)
     },
-    isAutoplay (val) {
+    autoplay (val) {
       this.$store.dispatch('setAutoplay', val)
     }
   },
   created () {
-    this.isAutoplay = this.preIsAutoplay
+    this.autoplay = this.preIsAutoplay
   },
   methods: {
     inputAnnictUsername () {

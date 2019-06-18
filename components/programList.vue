@@ -45,8 +45,8 @@ export default {
     }
   },
   computed: {
-    fillterState () {
-      return this.$store.state.fillterState
+    filterState () {
+      return this.$store.state.filterState
     },
     inputSearchWord () {
       return this.$store.state.inputSearchWord
@@ -62,8 +62,8 @@ export default {
     }
   },
   watch: {
-    fillterState (val) {
-      this.fillterByTag(val)
+    filterState (val) {
+      this.filterByTag(val)
     },
     inputSearchWord (val) {
       this.debouncedSearchProgram()
@@ -76,7 +76,7 @@ export default {
     },
     searchByAnnict (val) {
       console.log(val)
-      this.fillterBySearchList(val)
+      this.filterBySearchList(val)
     }
   },
   created () {
@@ -102,10 +102,10 @@ export default {
       getJsonp(programInfoGetUrl)
       const vm = this
       window.callback = function (json) {
-        vm.fillterBySearchList(json.result)
+        vm.filterBySearchList(json.result)
       }
     },
-    fillterByTag (val) {
+    filterByTag (val) {
       if (val === '0') {
         this.programList = this.programsInfoList
       } else if (val >= 1 && val <= 6) {
@@ -114,10 +114,10 @@ export default {
           return day.match(val)
         })
       } else if (val === '7') {
-        this.fillterBySearchList(this.favoriteProgram)
+        this.filterBySearchList(this.favoriteProgram)
       }
     },
-    fillterBySearchList (list) {
+    filterBySearchList (list) {
       this.programList = this.programsInfoList.filter((a) => {
         let hit
         list.forEach(function (val) {
