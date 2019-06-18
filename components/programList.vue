@@ -167,7 +167,7 @@ export default {
 }
 
 .favorite {
-  outline: 7px solid #f50057;
-  outline-offset: -4px;
+  outline: 6px solid #f50057;
+  outline-offset: -5px;
 }
 </style>
