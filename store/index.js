@@ -4,7 +4,7 @@ export const state = () => ({
   inputSearchWord: '',
   annictUserName: '',
   favoriteProgram: [],
-  isAutoplay: false
+  autoplay: false
 })
 
 export const mutations = {
@@ -24,7 +24,7 @@ export const mutations = {
     state.favoriteProgram = state.favoriteProgram.filter(val => val !== payload)
   },
   setAutoplay (state, payload) {
-    state.isAutoplay = payload
+    state.autoplay = payload
   }
 }
 

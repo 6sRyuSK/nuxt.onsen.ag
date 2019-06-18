@@ -51,8 +51,11 @@
 <script>
 export default {
   props: {
-    nowPlaying: Object,
-    isAutoplay: Boolean
+    nowPlaying: {
+      type: Object,
+      required: true
+    },
+    autoplay: Boolean
   },
   computed: {
     favoriteProgram () {

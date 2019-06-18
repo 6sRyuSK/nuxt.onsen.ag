@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying :now-playing="nowPlaying" :isAutoplay="isAutoplay" v-if="JSON.stringify(nowPlaying) != '{}'"/>
+    <nowPlaying v-if="JSON.stringify(nowPlaying) != '{}'" :now-playing="nowPlaying" :autoplay="autoplay" />
     <v-layout row wrap>
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
@@ -29,7 +29,10 @@ export default {
     nowPlaying
   },
   props: {
-    programsInfoList: Array
+    programsInfoList: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {
@@ -54,8 +57,8 @@ export default {
     favoriteProgram () {
       return this.$store.state.favoriteProgram
     },
-    isAutoplay () {
-      return this.$store.state.isAutoplay
+    autoplay () {
+      return this.$store.state.autoplay
     }
   },
   watch: {
