@@ -75,7 +75,6 @@ export default {
       this.annictSearchProgram(val)
     },
     searchByAnnict (val) {
-      console.log(val)
       this.filterBySearchList(val)
     }
   },
@@ -93,7 +92,6 @@ export default {
       this.nowPlaying = item
       const playing = document.getElementsByClassName('nowPlaying')
       const offset = window.innerWidth <= 600 ? 0 : 35
-      console.log(playing)
       this.$nextTick(() => {
         goTo(playing[0] || 0, { offset })
       })
