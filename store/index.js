@@ -27,8 +27,8 @@ export const mutations = {
   setAutoplay (state, payload) {
     state.autoplay = payload
   },
-  setDrawer (state) {
-    state.drawer = !state.drawer
+  setDrawer (state, payload) {
+    state.drawer = payload
   }
 }
 
@@ -51,7 +51,7 @@ export const actions = {
   setAutoplay ({ commit }, payload) {
     commit('setAutoplay', payload)
   },
-  setDrawer ({ commit }) {
-    commit('setDrawer')
+  setDrawer ({ commit }, payload) {
+    commit('setDrawer', payload)
   }
 }

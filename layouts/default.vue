@@ -29,7 +29,7 @@
       />
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" fixed app>
-      <v-toolbar-side-icon @click="setDrawer" />
+      <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
     </v-toolbar>
     <v-content>
@@ -53,15 +53,8 @@ export default {
       filterState: '0',
       checkboxState: false,
       annictUsername: '',
-      autoplay: false
-    }
-  },
-  computed: {
-    preIsAutoplay () {
-      return this.$store.state.autoplay
-    },
-    drawer () {
-      return this.$store.state.drawer
+      autoplay: false,
+      drawer: false
     }
   },
   watch: {
@@ -70,10 +63,14 @@ export default {
     },
     autoplay (val) {
       this.$store.dispatch('setAutoplay', val)
+    },
+    drawer (val) {
+      this.$store.dispatch('setDrawer', val)
     }
   },
   created () {
-    this.autoplay = this.preIsAutoplay
+    this.autoplay = this.$store.state.autoplay
+    this.drawer = this.$store.state.drawer
   },
   methods: {
     inputAnnictUsername () {
