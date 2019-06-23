@@ -15,7 +15,7 @@
 .programInfo > title {
   font-size: 5vw;
 }
-@media screen and (min-width: 1024px) {
+@media (min-width: 600px) {
   .mp3Player {
     position: absolute;
   }
