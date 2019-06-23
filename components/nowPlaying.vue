@@ -75,26 +75,5 @@ export default {
 </script>
 
 <style scoped>
-.player {
-  width: 100%;
-  padding: 10px;
-}
-.player-img {
-  width: 30%;
-}
-.programInfo {
-  padding: 5px;
-  position: relative;
-}
-.programInfo > item {
-  margin-bottom: 5px;
-}
-.programInfo > title {
-  font-size: 5vw;
-}
-@media screen and (min-width: 1024px) {
-  .mp3Player {
-    position: absolute;
-  }
-}
+@import url('~/assets/style/nowPlaying.css');
 </style>

@@ -34,3 +34,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+@media (max-width: 600px) {
+  .container {
+    padding: 0;
+  }
+}
+</style>

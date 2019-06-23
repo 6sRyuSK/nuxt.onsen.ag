@@ -3,12 +3,12 @@
     <v-text-field
       v-model="inputSearchWord"
       append-icon="mic"
-      class="mx-3"
+      class="mx-3 inputSearch"
       flat
       label="Search"
       prepend-inner-icon="search"
       solo-inverted
-      height="60"
+      :height="height"
       background-color="pink lighten-2"
       color="grey lighten-3"
     />
@@ -19,12 +19,18 @@
 export default {
   data () {
     return {
-      inputSearchWord: ''
+      inputSearchWord: '',
+      height: 60
     }
   },
   watch: {
     inputSearchWord (val) {
       this.$store.dispatch('setInputSearchWord', val)
+    }
+  },
+  mounted () {
+    if (window.innerWidth <= 600) {
+      this.height = 30
     }
   }
 }

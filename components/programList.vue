@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying v-if="JSON.stringify(nowPlaying) != '{}'" :now-playing="nowPlaying" :autoplay="autoplay" />
-    <v-layout row wrap>
+    <nowPlaying v-if="JSON.stringify(nowPlaying) != '{}'" :now-playing="nowPlaying" :autoplay="autoplay" class="nowPlaying" />
+    <v-layout row wrap class="programList">
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
           :src="`https://www.onsen.ag${item.thumbnailPath}`"
@@ -91,7 +91,12 @@ export default {
   methods: {
     clickProgramPanel (item) {
       this.nowPlaying = item
-      goTo(0)
+      const playing = document.getElementsByClassName('nowPlaying')
+      const offset = window.innerWidth <= 600 ? 0 : 35
+      console.log(playing)
+      this.$nextTick(() => {
+        goTo(playing[0] || 0, { offset })
+      })
     },
     searchProgram () {
       if (this.inputSearchWord === '') {
@@ -162,12 +167,6 @@ export default {
 }
 </script>
 <style scoped>
-.panel-card {
-  transform: translateY(450px);
-}
-
-.favorite {
-  outline: 6px solid #f50057;
-  outline-offset: -5px;
-}
+@import url('~/assets/style/programList.css');
+@import url('~/assets/style/xsProgramList.css');
 </style>
