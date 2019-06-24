@@ -19,6 +19,15 @@
             </v-icon>
           </v-btn>
         </v-layout>
+        <!-- <v-spacer /> -->
+        <audio
+          v-if="isMobile"
+          :src="nowPlaying.moviePath"
+          controls
+          :autoplay="autoplay"
+          style="width:100%; bottom:0;"
+          class="mp3controllerSp"
+        />
       </v-img>
     </v-flex>
     <v-flex md8 class="programInfo">
@@ -38,6 +47,7 @@
         {{ nowPlaying.personality }}
       </h3>
       <audio
+        v-if="!isMobile"
         :src="nowPlaying.moviePath"
         controls
         :autoplay="autoplay"
@@ -57,10 +67,18 @@ export default {
     },
     autoplay: Boolean
   },
+  data () {
+    return {
+      isMobile: false
+    }
+  },
   computed: {
     favoriteProgram () {
       return this.$store.state.favoriteProgram
     }
+  },
+  mounted () {
+    this.isMobileCheck()
   },
   methods: {
     addFavorite (item) {
@@ -69,6 +87,9 @@ export default {
       } else {
         this.$store.dispatch('addFavoriteProgram', item)
       }
+    },
+    isMobileCheck () {
+      this.isMobile = window.innerWidth <= 600
     }
   }
 }
