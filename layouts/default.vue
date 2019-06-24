@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
-      <v-radio-group v-model="filterState" :mandatory="false">
+      <v-radio-group v-model="filterState">
         <v-radio label="All" value="0" />
         <v-radio label="月曜" value="1" />
         <v-radio label="火曜" value="2" />
@@ -50,34 +50,38 @@ export default {
       clipped: true,
       fixed: false,
       title: 'onsen.ag',
-      filterState: '0',
-      checkboxState: false,
-      annictUsername: '',
-      autoplay: false,
-      drawer: false
+      annictUsername: ''
     }
   },
-  watch: {
-    filterState (val) {
-      this.$store.dispatch('setfilterState', val)
+  computed: {
+    filterState: {
+      get () {
+        return this.$store.state.filterState
+      },
+      set (val) {
+        this.$store.dispatch('setfilterState', val)
+      }
     },
-    autoplay (val) {
-      this.$store.dispatch('setAutoplay', val)
+    autoplay: {
+      get () {
+        return this.$store.state.autoplay
+      },
+      set (val) {
+        this.$store.dispatch('setAutoplay', val)
+      }
     },
-    drawer (val) {
-      this.$store.dispatch('setDrawer', val)
+    drawer: {
+      get () {
+        return this.$store.state.drawer
+      },
+      set (val) {
+        this.$store.dispatch('setDrawer', val)
+      }
     }
-  },
-  created () {
-    this.autoplay = this.$store.state.autoplay
-    this.drawer = this.$store.state.drawer
   },
   methods: {
     inputAnnictUsername () {
       this.$nuxt.$emit('setAnnictUserName', this.annictUsername)
-    },
-    setDrawer () {
-      this.$store.dispatch('setDrawer')
     }
   }
 }
