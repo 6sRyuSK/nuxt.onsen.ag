@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     inputAnnictUsername () {
-      this.$store.dispatch('setAnnictUserName', this.annictUsername)
+      this.$nuxt.$emit('setAnnictUserName', this.annictUsername)
     },
     setDrawer () {
       this.$store.dispatch('setDrawer')

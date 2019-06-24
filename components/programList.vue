@@ -51,9 +51,6 @@ export default {
     inputSearchWord () {
       return this.$store.state.inputSearchWord
     },
-    annictUserName () {
-      return this.$store.state.annictUserName
-    },
     favoriteProgram () {
       return this.$store.state.favoriteProgram
     },
@@ -67,9 +64,6 @@ export default {
     },
     inputSearchWord (val) {
       this.debouncedSearchProgram()
-    },
-    annictUserName (val) {
-      this.getUserWatching(val)
     },
     userWatching (val) {
       this.annictSearchProgram(val)
@@ -87,6 +81,7 @@ export default {
           'Bearer 665698b3e3df57bb247c422dfe42b78cf40585a70afb3781d17ccc8699584df5'
       }
     })
+    this.$nuxt.$on('setAnnictUserName', val => this.getUserWatching(val))
   },
   methods: {
     clickProgramPanel (item) {
