@@ -77,6 +77,11 @@ export default {
       return this.$store.state.favoriteProgram
     }
   },
+  watch: {
+    nowPlaying () {
+      this.isMobileCheck()
+    }
+  },
   mounted () {
     this.isMobileCheck()
   },
