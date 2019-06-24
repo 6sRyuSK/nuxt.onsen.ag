@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-text-field
-      v-model="inputSearchWord"
+      v-model="SearchText"
       append-icon="mic"
       class="mx-3 inputSearch"
       flat
@@ -19,14 +19,28 @@
 export default {
   data () {
     return {
-      inputSearchWord: '',
+      inputSearchText: '',
       height: 60
     }
   },
-  watch: {
-    inputSearchWord (val) {
-      this.$store.dispatch('setInputSearchWord', val)
+  computed: {
+    SearchText: {
+      get () {
+        return this.inputSearcText
+      },
+      set (val) {
+        this.inputSearchText = val
+        this.debouncedInputSearchWord()
+      }
     }
+  },
+  methods: {
+    inputSearchWord () {
+      this.$nuxt.$emit('setInputSearchWord', this.inputSearchText)
+    }
+  },
+  created () {
+    this.debouncedInputSearchWord = _.debounce(this.inputSearchWord, 250)
   },
   mounted () {
     if (window.innerWidth <= 600) {

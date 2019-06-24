@@ -74,7 +74,7 @@ export default {
     }
   },
   created () {
-    this.debouncedSearchProgram = _.debounce(this.searchProgram, 250)
+    // this.debouncedSearchProgram = (val) => { _.debounce(this.searchProgram(val), 250) }
     this.client = new GraphQLClient(this.endPoint, {
       headers: {
         Authorization:
@@ -82,6 +82,7 @@ export default {
       }
     })
     this.$nuxt.$on('setAnnictUserName', val => this.getUserWatching(val))
+    this.$nuxt.$on('setInputSearchWord', val => this.searchProgram(val))
   },
   methods: {
     clickProgramPanel (item) {
@@ -93,12 +94,12 @@ export default {
         goTo(playing[0] || 0, { offset })
       })
     },
-    searchProgram () {
-      if (this.inputSearchWord === '') {
+    searchProgram (val) {
+      if (val === '') {
         this.programList = this.programsInfoList
         return
       }
-      const programInfoGetUrl = `https://www.onsen.ag/data/api/searchMovie?word=${this.inputSearchWord}`
+      const programInfoGetUrl = `https://www.onsen.ag/data/api/searchMovie?word=${val}`
       getJsonp(programInfoGetUrl)
       const vm = this
       window.callback = function (json) {

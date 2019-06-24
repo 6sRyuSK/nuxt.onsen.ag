@@ -1,7 +1,6 @@
 export const strict = false
 export const state = () => ({
   filterState: '0',
-  inputSearchWord: '',
   favoriteProgram: [],
   autoplay: false,
   drawer: false
@@ -10,9 +9,6 @@ export const state = () => ({
 export const mutations = {
   setfilterState (state, payload) {
     state.filterState = payload
-  },
-  setInputSearchWord (state, payload) {
-    state.inputSearchWord = payload
   },
   addFavoriteProgram (state, payload) {
     state.favoriteProgram.push(payload)
@@ -31,9 +27,6 @@ export const mutations = {
 export const actions = {
   setfilterState ({ commit }, payload) {
     commit('setfilterState', payload)
-  },
-  setInputSearchWord ({ commit }, payload) {
-    commit('setInputSearchWord', payload)
   },
   addFavoriteProgram ({ commit }, payload) {
     commit('addFavoriteProgram', payload)
