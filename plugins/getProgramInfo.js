@@ -27,7 +27,8 @@ const getProgramInfo = async (programList) => {
           update: new Date(value.update),
           schedule: value.schedule,
           personality: value.personality,
-          url: value.url
+          url: value.url,
+          count: value.count
         })
       } catch (err) {
         // console.log(err)

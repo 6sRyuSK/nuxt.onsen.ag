@@ -32,7 +32,7 @@
     </v-flex>
     <v-flex md8 class="programInfo">
       <h2 class="item title">
-        {{ nowPlaying.title }}
+        {{ nowPlaying.title }} : {{ isNaN(nowPlaying.count)  ? nowPlaying.count : '第' + nowPlaying.count + '回' }}
       </h2>
       <h3 class="item">
         {{
