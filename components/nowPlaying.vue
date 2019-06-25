@@ -19,11 +19,20 @@
             </v-icon>
           </v-btn>
         </v-layout>
+        <!-- <v-spacer /> -->
+        <audio
+          v-if="isMobile"
+          :src="nowPlaying.moviePath"
+          controls
+          :autoplay="autoplay"
+          style="width:100%; bottom:0;"
+          class="mp3controllerSp"
+        />
       </v-img>
     </v-flex>
     <v-flex md8 class="programInfo">
       <h2 class="item title">
-        {{ nowPlaying.title }}
+        {{ nowPlaying.title }} : {{ isNaN(nowPlaying.count) ? nowPlaying.count : '第' + nowPlaying.count + '回' }}
       </h2>
       <h3 class="item">
         {{
@@ -38,6 +47,7 @@
         {{ nowPlaying.personality }}
       </h3>
       <audio
+        v-if="!isMobile"
         :src="nowPlaying.moviePath"
         controls
         :autoplay="autoplay"
@@ -57,10 +67,23 @@ export default {
     },
     autoplay: Boolean
   },
+  data () {
+    return {
+      isMobile: false
+    }
+  },
   computed: {
     favoriteProgram () {
       return this.$store.state.favoriteProgram
     }
+  },
+  watch: {
+    nowPlaying () {
+      this.isMobileCheck()
+    }
+  },
+  mounted () {
+    this.isMobileCheck()
   },
   methods: {
     addFavorite (item) {
@@ -69,6 +92,9 @@ export default {
       } else {
         this.$store.dispatch('addFavoriteProgram', item)
       }
+    },
+    isMobileCheck () {
+      this.isMobile = window.innerWidth <= 600
     }
   }
 }

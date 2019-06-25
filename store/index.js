@@ -1,8 +1,6 @@
 export const strict = false
 export const state = () => ({
   filterState: '0',
-  inputSearchWord: '',
-  annictUserName: '',
   favoriteProgram: [],
   autoplay: false,
   drawer: false
@@ -11,12 +9,6 @@ export const state = () => ({
 export const mutations = {
   setfilterState (state, payload) {
     state.filterState = payload
-  },
-  setInputSearchWord (state, payload) {
-    state.inputSearchWord = payload
-  },
-  setAnnictUserName (state, payload) {
-    state.annictUserName = payload
   },
   addFavoriteProgram (state, payload) {
     state.favoriteProgram.push(payload)
@@ -27,20 +19,14 @@ export const mutations = {
   setAutoplay (state, payload) {
     state.autoplay = payload
   },
-  setDrawer (state) {
-    state.drawer = !state.drawer
+  setDrawer (state, payload) {
+    state.drawer = payload
   }
 }
 
 export const actions = {
   setfilterState ({ commit }, payload) {
     commit('setfilterState', payload)
-  },
-  setInputSearchWord ({ commit }, payload) {
-    commit('setInputSearchWord', payload)
-  },
-  setAnnictUserName ({ commit }, payload) {
-    commit('setAnnictUserName', payload)
   },
   addFavoriteProgram ({ commit }, payload) {
     commit('addFavoriteProgram', payload)
@@ -51,7 +37,7 @@ export const actions = {
   setAutoplay ({ commit }, payload) {
     commit('setAutoplay', payload)
   },
-  setDrawer ({ commit }) {
-    commit('setDrawer')
+  setDrawer ({ commit }, payload) {
+    commit('setDrawer', payload)
   }
 }
