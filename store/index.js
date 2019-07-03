@@ -1,6 +1,6 @@
 export const strict = false
 export const state = () => ({
-  filterState: '0',
+  filterState: 0,
   favoriteProgram: [],
   autoplay: false,
   drawer: false

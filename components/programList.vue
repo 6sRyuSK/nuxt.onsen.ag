@@ -105,15 +105,17 @@ export default {
       }
     },
     filterByTag (val) {
-      if (val === '0') {
+      if (val === 0) {
         this.programList = this.programsInfoList
       } else if (val >= 1 && val <= 6) {
         this.programList = this.programsInfoList.filter((a) => {
           const day = new Date(a.update).getDay().toString()
           return day.match(val)
         })
-      } else if (val === '7') {
+      } else if (val === 7) {
         this.filterBySearchList(this.favoriteProgram)
+      } else if (val === 8) {
+        this.programList = this.programsInfoList.filter(val => val.count === '01')
       }
     },
     filterBySearchList (list) {

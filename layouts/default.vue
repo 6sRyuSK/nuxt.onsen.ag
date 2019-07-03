@@ -2,14 +2,15 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-radio-group v-model="filterState">
-        <v-radio label="All" value="0" />
-        <v-radio label="月曜" value="1" />
-        <v-radio label="火曜" value="2" />
-        <v-radio label="水曜" value="3" />
-        <v-radio label="木曜" value="4" />
-        <v-radio label="金曜" value="5" />
-        <v-radio label="土曜・日曜" value="6" />
-        <v-radio label="お気に入り" value="7" />
+        <v-radio label="All" :value="0" />
+        <v-radio label="月曜" :value="1" />
+        <v-radio label="火曜" :value="2" />
+        <v-radio label="水曜" :value="3" />
+        <v-radio label="木曜" :value="4" />
+        <v-radio label="金曜" :value="5" />
+        <v-radio label="土曜・日曜" :value="6" />
+        <v-radio label="お気に入り" :value="7" />
+        <v-radio label="新番組" :value="8" />
       </v-radio-group>
 
       <v-checkbox v-model="autoplay" label="Autoplay" />
