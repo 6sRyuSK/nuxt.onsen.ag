@@ -34,17 +34,17 @@ export default {
       }
     }
   },
-  methods: {
-    inputSearchWord () {
-      this.$nuxt.$emit('setInputSearchWord', this.inputSearchText)
-    }
-  },
   created () {
     this.debouncedInputSearchWord = _.debounce(this.inputSearchWord, 250)
   },
   mounted () {
     if (window.innerWidth <= 600) {
       this.height = 30
+    }
+  },
+  methods: {
+    inputSearchWord () {
+      this.$nuxt.$emit('setInputSearchWord', this.inputSearchText)
     }
   }
 }
