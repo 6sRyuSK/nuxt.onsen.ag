@@ -1,7 +1,7 @@
 {
-  "name": "onsenag",
+  "name": "nuxt.onsen.ag",
   "version": "1.0.0",
-  "description": "My grand Nuxt.js project",
+  "description": "音泉Web APIを使用したNuxt製 音泉プレイヤー",
   "author": "6sRyuSK",
   "private": true,
   "scripts": {
