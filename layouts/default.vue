@@ -43,7 +43,7 @@
       </v-container>
     </v-content>
     <v-footer :fixed="fixed" app>
-      <span>作った人: <a href="https://twitter.com/6sRyuSk" target="_blank">@6sRyuSk</a></span>
+      <span>作った人: <a href="https://twitter.com/6sRyuSk" target="_blank">@6sRyuSk</a></span><span style="position: absolute; right: 10px;">onsen.agのWeb APIを使用しています。<a href="http://www.onsen.ag" target="_blank">本家サイト</a></span>
     </v-footer>
   </v-app>
 </template>
