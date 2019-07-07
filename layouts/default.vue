@@ -18,7 +18,7 @@
         <v-checkbox v-model="autoplay" label="Autoplay" />
       </div>
 
-      <label for="searchByAnnict">Annict.comのユーザー情報をもとに番組を検索することができます。 (beta)</label>
+      <label for="searchByAnnict"><a href="https://Annict.com" target="_blank">Annict.com</a>のユーザー情報をもとに番組を検索することができます。 (beta)</label>
       <v-text-field
         v-model="annictUsername"
         name="searchByAnnict"
