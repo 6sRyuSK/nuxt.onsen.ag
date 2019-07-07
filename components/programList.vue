@@ -134,9 +134,7 @@ export default {
       }} }} }
       `
       this.client.request(query).then((data) => {
-        return (this.userWatching = data.user.works.edges.map((val) => {
-          return val.node.twitterUsername
-        }))
+        this.userWatching = data.user.works.edges.map(val => val.node.twitterUsername)
       })
     },
     async annictSearchProgram (searchQueue) {
