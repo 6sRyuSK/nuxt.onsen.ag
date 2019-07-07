@@ -39,7 +39,7 @@
       </v-container>
     </v-content>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+      <span>作った人: <a href="https://twitter.com/6sRyuSk" target="_blank">@6sRyuSk</a></span>
     </v-footer>
   </v-app>
 </template>
