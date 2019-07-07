@@ -14,7 +14,7 @@
       </v-radio-group>
 
       <v-checkbox v-model="autoplay" label="Autoplay" />
-      <label for="searchByAnnict">Search by username of the Annict.com (beta)</label>
+      <label for="searchByAnnict">Annict.comのユーザー情報をもとに番組を検索することができます。 (beta)</label>
       <v-text-field
         v-model="annictUsername"
         name="searchByAnnict"
