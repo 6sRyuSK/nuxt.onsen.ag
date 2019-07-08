@@ -110,6 +110,9 @@ export default {
       } else if (val >= 1 && val <= 6) {
         this.programList = this.programsInfoList.filter((a) => {
           const day = new Date(a.update).getDay().toString()
+          if (val === 6) {
+            return day.match('6|0')
+          }
           return day.match(val)
         })
       } else if (val === 7) {
