@@ -1,8 +1,8 @@
 # nuxt.onsen.ag
 
-[nuxt.onsen.ag](https://onsenag.appspot.com){:target="_blank"}
+[nuxt.onsen.ag](https://onsenag.appspot.com)
 
-[![nuxt.onsen.ag](https://i.gyazo.com/e4b78dd27297446a3babc7bc0f1d995d.png)](https://onsenag.appspot.com){:target="_blank"}
+[![nuxt.onsen.ag](https://i.gyazo.com/e4b78dd27297446a3babc7bc0f1d995d.png)](https://onsenag.appspot.com)
 
 > インターネットラジオステーション＜音泉＞のWEB APIを使用したNuxt APP
 
