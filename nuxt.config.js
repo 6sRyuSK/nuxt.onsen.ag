@@ -2,6 +2,7 @@ import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import webpack from 'webpack'
 import pkg from './package'
 
+require('dotenv').config()
 export default {
   mode: 'universal',
 
@@ -47,7 +48,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
-    ['@nuxtjs/pwa', { icon: false }]
+    ['@nuxtjs/pwa', { icon: false }],
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Axios module configuration
@@ -56,6 +58,9 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  env: {
+    baseUrl: process.env.AnnictToken
+  },
   /*
    ** Build configuration
    */

@@ -74,14 +74,16 @@ export default {
   },
   created () {
     // this.debouncedSearchProgram = (val) => { _.debounce(this.searchProgram(val), 250) }
+    this.$nuxt.$on('setAnnictUserName', val => this.getUserWatching(val))
+    this.$nuxt.$on('setInputSearchWord', val => this.searchProgram(val))
+  },
+  mounted () {
     this.client = new GraphQLClient(this.endPoint, {
       headers: {
         Authorization:
-          'Bearer 665698b3e3df57bb247c422dfe42b78cf40585a70afb3781d17ccc8699584df5'
+          `Bearer ${process.env.AnnictToken}`
       }
     })
-    this.$nuxt.$on('setAnnictUserName', val => this.getUserWatching(val))
-    this.$nuxt.$on('setInputSearchWord', val => this.searchProgram(val))
   },
   methods: {
     clickProgramPanel (item) {
