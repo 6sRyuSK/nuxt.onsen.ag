@@ -51,7 +51,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/eslint-module',
-    ['@nuxtjs/pwa', { icon: false }],
+    ['@nuxtjs/pwa'],
     '@nuxtjs/dotenv'
   ],
   /*
@@ -64,6 +64,17 @@ export default {
   env: {
     baseUrl: process.env.AnnictToken
   },
+
+  manifest: {
+    name: 'oNusen',
+    short_name: 'oNusen',
+    lang: 'ja',
+    theme_color: '#f5f5f5',
+    background_color: '#f5f5f5',
+    start_url: '/',
+    display: 'standalone'
+  },
+
   /*
    ** Build configuration
    */
