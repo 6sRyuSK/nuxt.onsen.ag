@@ -45,6 +45,7 @@
     "prettier": "^1.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "lodash": ">=4.17.13"
+    "lodash": ">=4.17.13",
+    "eslint-utils": ">=1.4.1"
   }
 }
