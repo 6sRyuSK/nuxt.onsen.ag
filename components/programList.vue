@@ -18,11 +18,12 @@
   </v-container>
 </template>
 <script>
-import nowPlaying from '~/components/nowPlaying'
-
-import getJsonp from '~/plugins/getJsonp'
 import { GraphQLClient } from 'graphql-request'
 import goTo from 'vuetify/lib/components/Vuetify/goTo'
+
+import getJsonp from '~/plugins/getJsonp'
+
+import nowPlaying from '~/components/nowPlaying'
 
 export default {
   components: {
