@@ -28,7 +28,7 @@ jobs:
       run: |
         echo '${{ secrets.GAE_DEPLOY_CERT }}' > cert.json
         echo 'github@onsenag.iam.gserviceaccount.com' | gcloud auth activate-service-account --key-file cert.json
-        gcloud app deploy app.yaml --project {GCPプロジェクト名}
+        gcloud app deploy app.yaml --project onsenag
 
       env:
         CI: true
