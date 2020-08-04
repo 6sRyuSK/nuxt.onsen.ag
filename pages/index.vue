@@ -9,22 +9,21 @@
 import axios from 'axios'
 import programList from '~/components/programList'
 import inputSearch from '~/components/inputSearch'
-import getProgramInfo from '~/plugins/getProgramInfo'
+// import getProgramInfo from '~/plugins/getProgramInfo'
 // import getJsonp from '~/plugins/getJsonp'
 export default {
   components: {
     programList,
     inputSearch
   },
-  async asyncData ({ store }) {
-    const programListBaseUrl =
-      'https://www.onsen.ag/api/shownMovie/shownMovie.json'
-    const programListGetUrl = encodeURI(programListBaseUrl)
-    const res = await axios.get(programListGetUrl).then(function (response) {
-      return response.data.result
+  async asyncData () {
+    const programListBaseUrl = 'https://www.onsen.ag/web_api/programs'
+    const res = await axios.get(programListBaseUrl).then((response) => {
+      return response.data
     })
 
-    const programInfoList = await getProgramInfo(res)
+    const programInfoList = res
+    // console.log(programInfoList)
     return {
       programInfoList
     }

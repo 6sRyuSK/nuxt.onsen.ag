@@ -4,10 +4,10 @@
     <v-layout row wrap class="programList">
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
-          :src="`https://www.onsen.ag${item.thumbnailPath}`"
+          :src="item.image.url"
           :class="
             `image ${
-              favoriteProgram.find(val => val == item.url) ? 'favorite' : ''
+              favoriteProgram.find(val => val == item.id) ? 'favorite' : ''
             }`
           "
           width="100%"
