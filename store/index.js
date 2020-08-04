@@ -3,8 +3,7 @@ export const state = () => ({
   filterState: 0,
   favoriteProgram: [],
   autoplay: false,
-  drawer: false,
-  programs: []
+  drawer: false
 })
 
 export const mutations = {
@@ -22,9 +21,6 @@ export const mutations = {
   },
   setDrawer (state, payload) {
     state.drawer = payload
-  },
-  setPrograms (state, payload) {
-    state.programs = payload
   }
 }
 
@@ -43,8 +39,5 @@ export const actions = {
   },
   setDrawer ({ commit }, payload) {
     commit('setDrawer', payload)
-  },
-  setPrograms ({ commit }, payload) {
-    commit('setPrograms', payload)
   }
 }

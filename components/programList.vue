@@ -52,7 +52,7 @@ export default {
       return this.$store.state.autoplay
     },
     programList () {
-      return this.$store.state.programs
+      return this.$store.state.programs.programs
     }
   },
   watch: {

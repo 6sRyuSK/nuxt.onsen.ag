@@ -21,7 +21,7 @@ export default {
     const res = await axios.get(programListBaseUrl).then((response) => {
       return response.data
     })
-    store.dispatch('setPrograms', res)
+    store.dispatch('programs/setPrograms', res)
   },
   created () {
     this.$store.dispatch('setfilterState', '0')
