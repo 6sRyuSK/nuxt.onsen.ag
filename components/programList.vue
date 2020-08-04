@@ -34,13 +34,11 @@ export default {
       client: 0,
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
-      searchByAnnict: []
+      searchByAnnict: [],
+      programList: this.$store.state.programs.programs
     }
   },
   computed: {
-    filterState () {
-      return this.$store.state.filterState
-    },
     inputSearchWord () {
       return this.$store.state.inputSearchWord
     },
@@ -50,15 +48,12 @@ export default {
     autoplay () {
       return this.$store.state.autoplay
     },
-    programList () {
-      return this.$store.state.programs.programs
-    },
     playingProgram () {
       return this.$store.getters['programs/getPlayingProgram']
     }
   },
   watch: {
-    filterState (val) {
+    '$store.state.filterState' (val) {
       this.filterByTag(val)
     },
     inputSearchWord (val) {
@@ -109,19 +104,13 @@ export default {
     },
     filterByTag (val) {
       if (val === 0) {
-        this.programList = this.programsInfoList
+        this.programList = this.$store.state.programs.programs
       } else if (val >= 1 && val <= 6) {
-        this.programList = this.programsInfoList.filter((a) => {
-          const day = new Date(a.update).getDay().toString()
-          if (val === 6) {
-            return day.match('6|0')
-          }
-          return day.match(val)
-        })
+        this.programList = this.$store.getters['programs/getFilteredProgramsByDay'](val)
       } else if (val === 7) {
-        this.filterBySearchList(this.favoriteProgram)
+        // this.filterBySearchList(this.favoriteProgram)
       } else if (val === 8) {
-        this.programList = this.programsInfoList.filter(val => val.count === '01')
+        this.programList = this.$store.getters['programs/getNewPrograms']
       }
     },
     filterBySearchList (list) {

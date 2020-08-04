@@ -25,5 +25,11 @@ export const actions = {
 export const getters = {
   getPlayingProgram (state) {
     return state.playing !== -1 ? state.programs.find(item => item.id === state.playing) : null
+  },
+  getFilteredProgramsByDay: state => (day) => {
+    return state.programs.filter(item => item.delivery_day_of_week === day)
+  },
+  getNewPrograms (state) {
+    return state.programs.filter(item => item.category_list.find(val => val === 'new'))
   }
 }
