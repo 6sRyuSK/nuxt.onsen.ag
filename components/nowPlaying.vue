@@ -21,7 +21,7 @@
         </v-layout>
         <!-- <v-spacer /> -->
         <audio
-          v-if="isMobile"
+          v-if="isMobile && nowPlaying.contents.length"
           :src="nowPlaying.contents.filter(val => val.streaming_url !== null)[0].streaming_url"
           controls
           :autoplay="autoplay"
@@ -32,7 +32,7 @@
     </v-flex>
     <v-flex md8 class="programInfo">
       <h2 class="item title">
-        <span>{{ nowPlaying.title }}</span> : <span>{{ nowPlaying.contents.filter(val => val.streaming_url !== null)[0].title }}</span>
+        <span>{{ nowPlaying.title }}</span> : <span>{{ nowPlaying.contents.length ? nowPlaying.contents.filter(val => val.streaming_url !== null)[0].title : '' }}</span>
       </h2>
       <h3 class="item">
         {{ nowPlaying.updated }}: {{ nowPlaying.delivery_interval }}
@@ -41,7 +41,7 @@
         {{ nowPlaying.performers.map(val => val.name).join(' / ') }}
       </h3>
       <audio
-        v-if="!isMobile"
+        v-if="!isMobile && nowPlaying.contents.length"
         :src="nowPlaying.contents.filter(val => val.streaming_url !== null)[0].streaming_url"
         controls
         :autoplay="autoplay"
