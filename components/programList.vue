@@ -11,7 +11,7 @@
             }`
           "
           width="100%"
-          @click="() => clickProgramPanel(item.id)"
+          @click="() => clickProgramPanel(item)"
         />
       </v-flex>
     </v-layout>
@@ -35,7 +35,8 @@ export default {
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
       searchByAnnict: [],
-      programList: this.$store.state.programs.programs
+      programList: this.$store.state.programs.programs,
+      playingProgram: null
     }
   },
   computed: {
@@ -47,9 +48,6 @@ export default {
     },
     autoplay () {
       return this.$store.state.autoplay
-    },
-    playingProgram () {
-      return this.$store.getters['programs/getPlayingProgram']
     }
   },
   watch: {
@@ -81,9 +79,7 @@ export default {
   },
   methods: {
     clickProgramPanel (item) {
-      this.$store.dispatch('programs/setPlaying', item)
-      console.log(this.$store)
-      this.nowPlaying = item
+      this.playingProgram = item
       const playing = document.getElementsByClassName('nowPlaying')
       const offset = window.innerWidth <= 600 ? 0 : 35
       this.$nextTick(() => {
