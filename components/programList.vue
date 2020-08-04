@@ -1,6 +1,6 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying v-if="JSON.stringify(nowPlaying) != '{}'" :key="nowPlaying.url" :now-playing="nowPlaying" :autoplay="autoplay" class="nowPlaying" />
+    <nowPlaying v-if="playingProgram" :key="playingProgram.id" :now-playing="playingProgram" :autoplay="autoplay" class="nowPlaying" />
     <v-layout row wrap class="programList">
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
@@ -11,7 +11,7 @@
             }`
           "
           width="100%"
-          @click="() => clickProgramPanel(item)"
+          @click="() => clickProgramPanel(item.id)"
         />
       </v-flex>
     </v-layout>
@@ -34,8 +34,7 @@ export default {
       client: 0,
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
-      searchByAnnict: [],
-      nowPlaying: {}
+      searchByAnnict: []
     }
   },
   computed: {
@@ -53,6 +52,9 @@ export default {
     },
     programList () {
       return this.$store.state.programs.programs
+    },
+    playingProgram () {
+      return this.$store.getters['programs/getPlayingProgram']
     }
   },
   watch: {
@@ -84,6 +86,8 @@ export default {
   },
   methods: {
     clickProgramPanel (item) {
+      this.$store.dispatch('programs/setPlaying', item)
+      console.log(this.$store)
       this.nowPlaying = item
       const playing = document.getElementsByClassName('nowPlaying')
       const offset = window.innerWidth <= 600 ? 0 : 35
