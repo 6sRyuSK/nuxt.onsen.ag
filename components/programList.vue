@@ -29,15 +29,8 @@ export default {
   components: {
     nowPlaying
   },
-  props: {
-    programsInfoList: {
-      type: Array,
-      default: () => []
-    }
-  },
   data () {
     return {
-      programList: this.programsInfoList,
       client: 0,
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
@@ -57,6 +50,9 @@ export default {
     },
     autoplay () {
       return this.$store.state.autoplay
+    },
+    programList () {
+      return this.$store.state.programs
     }
   },
   watch: {

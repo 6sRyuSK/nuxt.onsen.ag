@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <inputSearch />
-    <programList :programs-info-list="programInfoList" />
+    <programList />
   </section>
 </template>
 
@@ -16,17 +16,12 @@ export default {
     programList,
     inputSearch
   },
-  async asyncData () {
+  async asyncData ({ store }) {
     const programListBaseUrl = 'https://www.onsen.ag/web_api/programs'
     const res = await axios.get(programListBaseUrl).then((response) => {
       return response.data
     })
-
-    const programInfoList = res
-    // console.log(programInfoList)
-    return {
-      programInfoList
-    }
+    store.dispatch('setPrograms', res)
   },
   created () {
     this.$store.dispatch('setfilterState', '0')
