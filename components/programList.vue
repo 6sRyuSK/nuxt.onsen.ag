@@ -20,6 +20,7 @@
 <script>
 import { GraphQLClient } from 'graphql-request'
 import goTo from 'vuetify/lib/components/Vuetify/goTo'
+import axios from 'axios'
 
 import getJsonp from '~/plugins/getJsonp'
 
@@ -86,17 +87,17 @@ export default {
         goTo(playing[0] || 0, { offset })
       })
     },
-    searchProgram (val) {
+    async searchProgram (val) {
       if (val === '') {
-        this.programList = this.programsInfoList
+        this.programList = this.$store.state.programs.programs
         return
       }
-      const programInfoGetUrl = `https://www.onsen.ag/data/api/searchMovie?word=${val}`
-      getJsonp(programInfoGetUrl)
-      const vm = this
-      window.callback = function (json) {
-        vm.filterBySearchList(json.result)
-      }
+      const searchProgramURL = `/api/search?word=${val}`
+      const programIdList = await axios.get(searchProgramURL).then((result) => {
+        // console.log(result)
+        return result.data.split(',').map(val => Number(val))
+      })
+      this.programList = this.$store.getters['programs/findProgramsManyToMany'](programIdList)
     },
     filterByTag (val) {
       if (val === 0) {
