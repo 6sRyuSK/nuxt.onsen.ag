@@ -94,8 +94,7 @@ export default {
       }
       const searchProgramURL = `/api/search?word=${val}`
       const programIdList = await axios.get(searchProgramURL).then((result) => {
-        // console.log(result)
-        return result.data.split(',').map(val => Number(val))
+        return result.data
       })
       this.programList = this.$store.getters['programs/findProgramsManyToMany'](programIdList)
     },

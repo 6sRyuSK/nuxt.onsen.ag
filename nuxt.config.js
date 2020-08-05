@@ -75,9 +75,7 @@ export default {
     display: 'standalone'
   },
 
-  serverMiddleware: [
-    { path: '/api/search', handler: '~/api/searchPrograms.js' }
-  ],
+  serverMiddleware: ['~/api/searchPrograms.js'],
 
   /*
    ** Build configuration
