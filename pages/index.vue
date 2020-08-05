@@ -19,7 +19,7 @@ export default {
   async asyncData ({ store }) {
     const programListBaseUrl = 'https://www.onsen.ag/web_api/programs'
     const res = await axios.get(programListBaseUrl).then((response) => {
-      return response.data
+      return response.data.sort((a, b) => b.contents.length !== 0 ? 1 : -1)
     })
     store.dispatch('programs/setPrograms', res)
   },
