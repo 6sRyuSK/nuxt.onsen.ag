@@ -1,7 +1,7 @@
 runtime: nodejs12
  
 handlers:
-  - url: /_nuxt
+  - url: /.nuxt
     static_dir: .nuxt/dist/client
   - url: /.*
     script: auto
