@@ -7,7 +7,7 @@
           :src="item.image.url"
           :class="
             `image ${
-              favoriteProgram.find(val => val == item.id) ? 'favorite' : ''
+              favoritePrograms.find(val => val == item.id) ? 'favorite' : ''
             }`
           "
           width="100%"
@@ -44,8 +44,8 @@ export default {
     inputSearchWord () {
       return this.$store.state.inputSearchWord
     },
-    favoriteProgram () {
-      return this.$store.state.favoriteProgram
+    favoritePrograms () {
+      return this.$store.state.programs.favoritePrograms
     },
     autoplay () {
       return this.$store.state.autoplay

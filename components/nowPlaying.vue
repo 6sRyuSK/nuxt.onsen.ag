@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     favoriteProgram () {
-      return this.$store.state.favoriteProgram
+      return this.$store.state.programs.favoritePrograms
     }
   },
   watch: {
@@ -80,11 +80,11 @@ export default {
     this.isMobileCheck()
   },
   methods: {
-    addFavorite (item) {
-      if (this.favoriteProgram.find(val => val === item)) {
-        this.$store.dispatch('removeFavoriteProgram', item)
+    addFavorite (id) {
+      if (this.favoriteProgram.find(val => val === id)) {
+        this.$store.dispatch('programs/removeFavorite', id)
       } else {
-        this.$store.dispatch('addFavoriteProgram', item)
+        this.$store.dispatch('programs/addFavorite', id)
       }
     },
     isMobileCheck () {

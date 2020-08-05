@@ -1,17 +1,30 @@
 export const strict = false
 export const state = () => ({
-  programs: []
+  programs: [],
+  favoritePrograms: []
 })
 
 export const mutations = {
   setPrograms (state, payload) {
     state.programs = payload
+  },
+  addFavorite (state, payload) {
+    state.favoritePrograms.push(payload)
+  },
+  removeFavorite (state, payload) {
+    state.favoritePrograms = state.favoritePrograms.filter(val => val !== payload)
   }
 }
 
 export const actions = {
   setPrograms ({ commit }, payload) {
     commit('setPrograms', payload)
+  },
+  addFavorite ({ commit }, payload) {
+    commit('addFavorite', payload)
+  },
+  removeFavorite ({ commit }, payload) {
+    commit('removeFavorite', payload)
   }
 }
 
@@ -24,5 +37,8 @@ export const getters = {
   },
   findProgramsManyToMany: state => (programIdList) => {
     return state.programs.filter(item => programIdList.some(val => val === item.id))
+  },
+  getFavoritePrograms (state) {
+    return this.findProgramsManyToMany(state.favoritePrograms)
   }
 }
