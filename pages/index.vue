@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <inputSearch />
-    <programList :programs-info-list="programInfoList" />
+    <programList />
   </section>
 </template>
 
@@ -9,7 +9,7 @@
 import axios from 'axios'
 import programList from '~/components/programList'
 import inputSearch from '~/components/inputSearch'
-import getProgramInfo from '~/plugins/getProgramInfo'
+// import getProgramInfo from '~/plugins/getProgramInfo'
 // import getJsonp from '~/plugins/getJsonp'
 export default {
   components: {
@@ -17,17 +17,11 @@ export default {
     inputSearch
   },
   async asyncData ({ store }) {
-    const programListBaseUrl =
-      'https://www.onsen.ag/api/shownMovie/shownMovie.json'
-    const programListGetUrl = encodeURI(programListBaseUrl)
-    const res = await axios.get(programListGetUrl).then(function (response) {
-      return response.data.result
+    const programListBaseUrl = 'https://www.onsen.ag/web_api/programs'
+    const res = await axios.get(programListBaseUrl).then((response) => {
+      return response.data.sort((a, b) => b.contents.length !== 0 ? 1 : -1)
     })
-
-    const programInfoList = await getProgramInfo(res)
-    return {
-      programInfoList
-    }
+    store.dispatch('programs/setPrograms', res)
   },
   created () {
     this.$store.dispatch('setfilterState', '0')

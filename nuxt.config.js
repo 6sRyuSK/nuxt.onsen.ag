@@ -42,7 +42,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify', '~/plugins/cookie-storage.js'],
+  plugins: ['@/plugins/vuetify', { src: '~/plugins/localStorage.js', ssr: false }],
 
   /*
    ** Nuxt.js modules
@@ -74,6 +74,8 @@ export default {
     start_url: '/',
     display: 'standalone'
   },
+
+  serverMiddleware: ['~/api/searchPrograms.js'],
 
   /*
    ** Build configuration

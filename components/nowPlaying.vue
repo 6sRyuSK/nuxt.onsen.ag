@@ -1,19 +1,19 @@
 <template>
   <v-layout v-if="nowPlaying != {}" row wrap class="player">
     <v-flex md4 style="width:30%" class="player-img">
-      <v-img :src="`https://www.onsen.ag${nowPlaying.thumbnailPath}`">
+      <v-img :src="nowPlaying.image.url">
         <v-layout>
           <v-spacer />
           <v-btn
-            v-if="favoriteProgram.find(item => item == nowPlaying.url)"
+            v-if="favoriteProgram.find(item => item == nowPlaying.id)"
             icon
-            @click="addFavorite(nowPlaying.url)"
+            @click="addFavorite(nowPlaying.id)"
           >
             <v-icon color="pink lighten-2">
               fas fa-heart
             </v-icon>
           </v-btn>
-          <v-btn v-else icon color="#eee" @click="addFavorite(nowPlaying.url)">
+          <v-btn v-else icon color="#eee" @click="addFavorite(nowPlaying.id)">
             <v-icon color="pink">
               far fa-heart
             </v-icon>
@@ -21,8 +21,8 @@
         </v-layout>
         <!-- <v-spacer /> -->
         <audio
-          v-if="isMobile"
-          :src="nowPlaying.moviePath"
+          v-if="isMobile && nowPlaying.contents.length"
+          :src="nowPlaying.contents.filter(val => val.streaming_url !== null)[0].streaming_url"
           controls
           :autoplay="autoplay"
           style="width:100%; bottom:0;"
@@ -32,23 +32,17 @@
     </v-flex>
     <v-flex md8 class="programInfo">
       <h2 class="item title">
-        <span>{{ nowPlaying.title }}</span> : <span>{{ isNaN(nowPlaying.count) ? nowPlaying.count : '第' + nowPlaying.count + '回' }}</span>
+        <span>{{ nowPlaying.title }}</span> : <span>{{ nowPlaying.contents.length ? nowPlaying.contents.filter(val => val.streaming_url !== null)[0].title : '' }}</span>
       </h2>
       <h3 class="item">
-        {{
-          nowPlaying.update.toLocaleDateString('ja-JP', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })
-        }}: {{ nowPlaying.schedule }}
+        {{ nowPlaying.updated }}: {{ nowPlaying.delivery_interval }}
       </h3>
       <h3 class="item">
-        {{ nowPlaying.personality }}
+        {{ nowPlaying.performers.map(val => val.name).join(' / ') }}
       </h3>
       <audio
-        v-if="!isMobile"
-        :src="nowPlaying.moviePath"
+        v-if="!isMobile && nowPlaying.contents.length"
+        :src="nowPlaying.contents.filter(val => val.streaming_url !== null)[0].streaming_url"
         controls
         :autoplay="autoplay"
         style="width:100%; bottom:0;"
@@ -74,7 +68,7 @@ export default {
   },
   computed: {
     favoriteProgram () {
-      return this.$store.state.favoriteProgram
+      return this.$store.state.programs.favoritePrograms
     }
   },
   watch: {
@@ -86,11 +80,11 @@ export default {
     this.isMobileCheck()
   },
   methods: {
-    addFavorite (item) {
-      if (this.favoriteProgram.find(val => val === item)) {
-        this.$store.dispatch('removeFavoriteProgram', item)
+    addFavorite (id) {
+      if (this.favoriteProgram.find(val => val === id)) {
+        this.$store.dispatch('programs/removeFavorite', id)
       } else {
-        this.$store.dispatch('addFavoriteProgram', item)
+        this.$store.dispatch('programs/addFavorite', id)
       }
     },
     isMobileCheck () {

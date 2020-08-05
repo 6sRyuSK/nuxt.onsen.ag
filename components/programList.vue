@@ -1,13 +1,13 @@
 <template>
   <v-container fluid grid-list-sm>
-    <nowPlaying v-if="JSON.stringify(nowPlaying) != '{}'" :key="nowPlaying.url" :now-playing="nowPlaying" :autoplay="autoplay" class="nowPlaying" />
+    <nowPlaying v-if="playingProgram" :key="playingProgram.id" :now-playing="playingProgram" :autoplay="autoplay" class="nowPlaying" />
     <v-layout row wrap class="programList">
       <v-flex v-for="item in programList" :key="item.title" md3 xs6 sm4>
         <v-img
-          :src="`https://www.onsen.ag${item.thumbnailPath}`"
+          :src="item.image.url"
           :class="
             `image ${
-              favoriteProgram.find(val => val == item.url) ? 'favorite' : ''
+              favoritePrograms.find(val => val == item.id) ? 'favorite' : ''
             }`
           "
           width="100%"
@@ -20,6 +20,7 @@
 <script>
 import { GraphQLClient } from 'graphql-request'
 import goTo from 'vuetify/lib/components/Vuetify/goTo'
+import axios from 'axios'
 
 import getJsonp from '~/plugins/getJsonp'
 
@@ -29,38 +30,29 @@ export default {
   components: {
     nowPlaying
   },
-  props: {
-    programsInfoList: {
-      type: Array,
-      default: () => []
-    }
-  },
   data () {
     return {
-      programList: this.programsInfoList,
       client: 0,
       endPoint: 'https://api.annict.com/graphql',
       userWatching: [],
       searchByAnnict: [],
-      nowPlaying: {}
+      programList: this.$store.state.programs.programs,
+      playingProgram: null
     }
   },
   computed: {
-    filterState () {
-      return this.$store.state.filterState
-    },
     inputSearchWord () {
       return this.$store.state.inputSearchWord
     },
-    favoriteProgram () {
-      return this.$store.state.favoriteProgram
+    favoritePrograms () {
+      return this.$store.state.programs.favoritePrograms
     },
     autoplay () {
       return this.$store.state.autoplay
     }
   },
   watch: {
-    filterState (val) {
+    '$store.state.filterState' (val) {
       this.filterByTag(val)
     },
     inputSearchWord (val) {
@@ -88,40 +80,33 @@ export default {
   },
   methods: {
     clickProgramPanel (item) {
-      this.nowPlaying = item
+      this.playingProgram = item
       const playing = document.getElementsByClassName('nowPlaying')
       const offset = window.innerWidth <= 600 ? 0 : 35
       this.$nextTick(() => {
         goTo(playing[0] || 0, { offset })
       })
     },
-    searchProgram (val) {
+    async searchProgram (val) {
       if (val === '') {
-        this.programList = this.programsInfoList
+        this.programList = this.$store.state.programs.programs
         return
       }
-      const programInfoGetUrl = `https://www.onsen.ag/data/api/searchMovie?word=${val}`
-      getJsonp(programInfoGetUrl)
-      const vm = this
-      window.callback = function (json) {
-        vm.filterBySearchList(json.result)
-      }
+      const searchProgramURL = `/api/search?word=${val}`
+      const programIdList = await axios.get(searchProgramURL).then((result) => {
+        return result.data
+      })
+      this.programList = this.$store.getters['programs/findProgramsManyToMany'](programIdList)
     },
     filterByTag (val) {
       if (val === 0) {
-        this.programList = this.programsInfoList
+        this.programList = this.$store.state.programs.programs
       } else if (val >= 1 && val <= 6) {
-        this.programList = this.programsInfoList.filter((a) => {
-          const day = new Date(a.update).getDay().toString()
-          if (val === 6) {
-            return day.match('6|0')
-          }
-          return day.match(val)
-        })
+        this.programList = this.$store.getters['programs/getFilteredProgramsByDay'](val)
       } else if (val === 7) {
-        this.filterBySearchList(this.favoriteProgram)
+        // this.filterBySearchList(this.favoriteProgram)
       } else if (val === 8) {
-        this.programList = this.programsInfoList.filter(val => val.count === '01')
+        this.programList = this.$store.getters['programs/getNewPrograms']
       }
     },
     filterBySearchList (list) {
